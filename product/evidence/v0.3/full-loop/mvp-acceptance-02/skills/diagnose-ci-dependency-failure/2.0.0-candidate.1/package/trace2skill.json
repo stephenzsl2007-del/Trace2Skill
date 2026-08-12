@@ -1,0 +1,20 @@
+{
+  "name": "diagnose-ci-dependency-failure",
+  "version": "2.0.0-candidate.1",
+  "status": "candidate",
+  "experience_id": "experience-v03-trace-analysis-d54c4d0a",
+  "source_trace_ids": [
+    "trace_13d6730f107949ed826b28629d3b9fe8",
+    "trace_ef00f7013bfa42cba0d4c94eb772d590",
+    "trace_1033f617c6e84149867370661fafe155"
+  ],
+  "generation_model": "qwen-plus",
+  "prompt_hash": "3a8329470fbb16ace33ab7cc33cb650536a74066f304265ec24edd3502cea701",
+  "evidence_refs": [
+    "matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU",
+    "matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g",
+    "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc",
+    "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+    "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+  ]
+}

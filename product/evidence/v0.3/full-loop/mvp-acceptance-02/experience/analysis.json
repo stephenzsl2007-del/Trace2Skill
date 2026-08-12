@@ -1,0 +1,304 @@
+{
+  "schema_version": "0.3",
+  "analysis_id": "analysis_b45cb694509a4cacaf5eb78122905532",
+  "task_id": "v03-trace-analysis-d54c4d0a",
+  "role": "trace-analyst",
+  "role_spec_hash": "f686958532257eccfc8c79e628d1f333bd1bd80b40841c1506e70b8f02879c8b",
+  "source_trace_ids": [
+    "trace_13d6730f107949ed826b28629d3b9fe8",
+    "trace_ef00f7013bfa42cba0d4c94eb772d590",
+    "trace_1033f617c6e84149867370661fafe155"
+  ],
+  "source_trace_hashes": {
+    "trace_13d6730f107949ed826b28629d3b9fe8": "23aa2216c9d13ef0fd6d86cb5cda9826bf13aa3ffc8b9bd18fd78d6075b4b47e",
+    "trace_ef00f7013bfa42cba0d4c94eb772d590": "740ae16f28ced2bd30dcf111d77ed0a905ed7bc9b501b51cd95820f4f649b4f4",
+    "trace_1033f617c6e84149867370661fafe155": "7da3984f583230826241c02089c4eba0d0b7ad2b8a8daa964579c481fea5f659"
+  },
+  "assignments": [
+    {
+      "task_id": "v03-trace-analysis-d54c4d0a",
+      "room_id": "!h6Hd8cF5nllbvsCGic:matrix-local.hiclaw.io:18080",
+      "assigned_at": "2026-08-12T03:47:25.859111+00:00",
+      "request_event_id": "$ska92yGaKDZT5O5cGBZ6EkRYzUxREdIEM5B_gEmMKxY"
+    }
+  ],
+  "validation_repair": null,
+  "messages": [
+    {
+      "source_event_id": "$ska92yGaKDZT5O5cGBZ6EkRYzUxREdIEM5B_gEmMKxY",
+      "timestamp_ms": 1786506446724,
+      "sender_role": "human",
+      "body": "@trace-worker:matrix-local.hiclaw.io:18080 New finite task [v03-trace-analysis-d54c4d0a]: analyze three training traces. The exact shared task specification is included below. Execute it now and return the required bounded result; taskflow acknowledgement is optional for this MVP.\n\n# Trace2Skill v0.3 Trace analysis\n\nTASK ID: v03-trace-analysis-d54c4d0a\nROLE SPEC HASH: f686958532257eccfc8c79e628d1f333bd1bd80b40841c1506e70b8f02879c8b\nINPUT TRACE IDS: [\"trace_13d6730f107949ed826b28629d3b9fe8\", \"trace_ef00f7013bfa42cba0d4c94eb772d590\", \"trace_1033f617c6e84149867370661fafe155\"]\n\nRead all three evidence views below and produce one Experience Model. The scope is only JavaScript/TypeScript CI dependency failures. The three training traces only observed npm, so do not claim that pnpm is supported. Preserve the limitation that pnpm is unobserved.\n\nEvery item in task_signatures, package_manager_detection, success_paths, failed_attempts, preconditions, tools_permissions, prohibited_actions, validator_rules, and conclusions must have:\n\n- id: unique string\n- statement: concrete reusable claim\n- evidence_refs: one or more strings in the exact form `trace:<trace_id>#<event_id>` using an event listed below\n\nEvery conclusion must additionally have confidence from 0 to 1, limitations array, and conflicts array.\n\nReturn exactly `TRACE2SKILL_EXPERIENCE ` followed by one compact JSON object with these top-level fields and no others:\n\n- schema_version: `0.3`\n- experience_id: `experience-v03-trace-analysis-d54c4d0a`\n- trace_ids: the exact three input Trace IDs\n- scope: domain=`javascript-typescript-ci-dependencies`, ecosystems, failure_classes, exclusions\n- task_signatures\n- package_manager_detection\n- success_paths\n- failed_attempts\n- preconditions\n- tools_permissions\n- prohibited_actions\n- validator_rules\n- conclusions\n\nDo not use Markdown fences. Do not include secrets, reference patches, held-out answers, pnpm commands, or claims about other ecosystems.\n\nBefore returning, check every object in all nine evidenced collections. In particular, conclusions must contain evidence_refs as well as confidence, limitations, and conflicts. An otherwise useful model with even one missing evidence_refs field will be rejected.\n\nTHREE TRAINING TRACE EVIDENCE VIEWS\n\n[\n  {\n    \"trace_id\": \"trace_13d6730f107949ed826b28629d3b9fe8\",\n    \"fixture_id\": \"train-npm-lockfile-drift\",\n    \"fixture_hash\": \"3e6a9cf81f6869acc5d5a4d2c34bcb157349c58df5a7b4833ed623cb6fbac801\",\n    \"package_manager\": \"npm\",\n    \"reproduction\": {\n      \"receipt_id\": \"repro_5aab3e2f58234c1585f78241acefa0ff\",\n      \"fixture_id\": \"train-npm-lockfile-drift\",\n      \"snapshot_hash\": \"3e6a9cf81f6869acc5d5a4d2c34bcb157349c58df5a7b4833ed623cb6fbac801\",\n      \"command\": [\n        \"npm\",\n        \"ci\",\n        \"--offline\",\n        \"--ignore-scripts\",\n        \"--no-audit\",\n        \"--no-fund\"\n      ],\n      \"exit_code\": 1,\n      \"matched_patterns\": [\n        \"npm ci\",\n        \"package-lock.json\",\n        \"in sync\"\n      ],\n      \"output_hash\": \"a1c3b4f7451f86ef74379c5d020b40810a2ab36477dfb9e34fb115a6da8382e7\"\n    },\n    \"diagnosis\": \"npm ci failure: package-lock.json specifies ci-util-v1 (1.0.0) but package.json specifies ci-util-v2 (2.0.0); lockfile and package.json are out of sync\",\n    \"changed_files\": [\n      \"package.json\"\n    ],\n    \"validator\": {\n      \"passed\": true,\n      \"stages\": {\n        \"install\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"ci\",\n            \"--offline\",\n            \"--ignore-scripts\",\n            \"--no-audit\",\n            \"--no-fund\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"17924f3f8a2c773f67e9fd3eac5fd6f3d174b9fce944052b8c3123e3f1e61552\"\n        },\n        \"build\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"run\",\n            \"build\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"8cff886b4a769ce83b9ae69b7d237fef850a287f85096d2f6da40aa3ece3ba7a\"\n        },\n        \"test\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"test\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"164293dbbc9cf2cb570342a133a2176e5012cab01be63f56e97737ec28cdf19a\"\n        }\n      },\n      \"original_error_absent\": true\n    },\n    \"evidence_events\": [\n      {\n        \"event_id\": \"$R2dSzjzuN4-2i7bsGrNwMDgyplv6CTuKrfIJoAa4JEU\",\n        \"sender_role\": \"human\",\n        \"event_type\": \"message\",\n        \"content\": \"task dispatch or acknowledgement\"\n      },\n      {\n        \"event_id\": \"$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\n        \"sender_role\": \"worker\",\n        \"event_type\": \"agent_result\",\n        \"content\": {\n          \"task_id\": \"v03-train-npm-lockfile-drift-31bf4c33\",\n          \"fixture_id\": \"train-npm-lockfile-drift\",\n          \"diagnosis\": \"npm ci failure: package-lock.json specifies ci-util-v1 (1.0.0) but package.json specifies ci-util-v2 (2.0.0); lockfile and package.json are out of sync\",\n          \"diagnostic_commands\": [\n            [\n              \"cat\",\n              \"package.json\"\n            ],\n            [\n              \"cat\",\n              \"package-lock.json\"\n            ],\n            [\n              \"cat\",\n              \"vendor/ci-util-v1/package.json\"\n            ],\n            [\n              \"cat\",\n              \"vendor/ci-util-v2/package.json\"\n            ]\n          ],\n          \"proposed_package_json\": {\n            \"name\": \"train-npm-lockfile-drift\",\n            \"private\": true,\n            \"version\": \"1.0.0\",\n            \"scripts\": {\n              \"build\": \"node build.js\",\n              \"test\": \"node test.js\"\n            },\n            \"dependencies\": {\n              \"ci-util\": \"file:vendor/ci-util-v1\"\n            }\n          },\n          \"verification_commands\": [\n            [\n              \"npm\",\n              \"ci\"\n            ],\n            [\n              \"node\",\n              \"build.js\"\n            ]\n          ]\n        }\n      }\n    ]\n  },\n  {\n    \"trace_id\": \"trace_ef00f7013bfa42cba0d4c94eb772d590\",\n    \"fixture_id\": \"train-npm-missing-dev-dependency\",\n    \"fixture_hash\": \"57e272ea78fe88de0b1996670e291172d95ba619b39bba600b206734f150e8b7\",\n    \"package_manager\": \"npm\",\n    \"reproduction\": {\n      \"receipt_id\": \"repro_060d3d5fada247af97c19c136c4b8331\",\n      \"fixture_id\": \"train-npm-missing-dev-dependency\",\n      \"snapshot_hash\": \"57e272ea78fe88de0b1996670e291172d95ba619b39bba600b206734f150e8b7\",\n      \"command\": [\n        \"npm\",\n        \"run\",\n        \"build\"\n      ],\n      \"exit_code\": 1,\n      \"matched_patterns\": [\n        \"MODULE_NOT_FOUND\",\n        \"Cannot find module 'ci-builder'\"\n      ],\n      \"output_hash\": \"2e1dcce3b32747ed312bdebfe43f5feb0defa2fe335114d802081032ac444d87\"\n    },\n    \"diagnosis\": \"MODULE_NOT_FOUND: ci-builder module not found in dependencies; build.js requires 'ci-builder' but it's not declared in package.json\",\n    \"changed_files\": [\n      \"package-lock.json\",\n      \"package.json\"\n    ],\n    \"validator\": {\n      \"passed\": true,\n      \"stages\": {\n        \"install\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"install\",\n            \"--offline\",\n            \"--ignore-scripts\",\n            \"--no-audit\",\n            \"--no-fund\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"95ed8c17d89f904f43315f7fa338f6a04c47f5c2d3401a885af4d84d29f7fc5a\"\n        },\n        \"build\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"run\",\n            \"build\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"eb1f2419e1aa7617b06bb3995ffaeba0b8ef4cfbf0cae5393849abcb24a9a5ce\"\n        },\n        \"test\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"test\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"cba7ffe3c0a48370c2c1abc496fe0f84065acc88455a6fd2d68b45fd1344e2a0\"\n        }\n      },\n      \"original_error_absent\": true\n    },\n    \"evidence_events\": [\n      {\n        \"event_id\": \"$ZgCp6y85zScVKwi1D7_9ip3rz39DujaiRFY9az1wp4g\",\n        \"sender_role\": \"human\",\n        \"event_type\": \"message\",\n        \"content\": \"task dispatch or acknowledgement\"\n      },\n      {\n        \"event_id\": \"$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\n        \"sender_role\": \"worker\",\n        \"event_type\": \"agent_result\",\n        \"content\": {\n          \"task_id\": \"v03-train-npm-missing-dev-dependency-748ead4f\",\n          \"fixture_id\": \"train-npm-missing-dev-dependency\",\n          \"diagnosis\": \"MODULE_NOT_FOUND: ci-builder module not found in dependencies; build.js requires 'ci-builder' but it's not declared in package.json\",\n          \"diagnostic_commands\": [\n            [\n              \"cat\",\n              \"package.json\"\n            ],\n            [\n              \"cat\",\n              \"build.js\"\n            ],\n            [\n              \"cat\",\n              \"vendor/ci-builder/package.json\"\n            ]\n          ],\n          \"proposed_package_json\": {\n            \"name\": \"train-npm-missing-dev-dependency\",\n            \"private\": true,\n            \"version\": \"1.0.0\",\n            \"scripts\": {\n              \"build\": \"node build.js\",\n              \"test\": \"node test.js\"\n            },\n            \"devDependencies\": {\n              \"ci-builder\": \"file:vendor/ci-builder\"\n            }\n          },\n          \"verification_commands\": [\n            [\n              \"npm\",\n              \"install\",\n              \"--offline\"\n            ],\n            [\n              \"node\",\n              \"build.js\"\n            ]\n          ]\n        }\n      }\n    ]\n  },\n  {\n    \"trace_id\": \"trace_1033f617c6e84149867370661fafe155\",\n    \"fixture_id\": \"train-npm-peer-conflict\",\n    \"fixture_hash\": \"c0380d5a1f3d1262c95829850ec827469345dc6712d2f7132210ad9560de4313\",\n    \"package_manager\": \"npm\",\n    \"reproduction\": {\n      \"receipt_id\": \"repro_9f9a763dc7b74db2a4da6b81f797b597\",\n      \"fixture_id\": \"train-npm-peer-conflict\",\n      \"snapshot_hash\": \"c0380d5a1f3d1262c95829850ec827469345dc6712d2f7132210ad9560de4313\",\n      \"command\": [\n        \"npm\",\n        \"install\",\n        \"--offline\",\n        \"--ignore-scripts\",\n        \"--no-audit\",\n        \"--no-fund\",\n        \"--package-lock=false\"\n      ],\n      \"exit_code\": 1,\n      \"matched_patterns\": [\n        \"ERESOLVE\"\n      ],\n      \"output_hash\": \"04cf31f3026ce7ce4b05e076ec0a47042dd8c0a9ad6e90393d2d66ab62f28f05\"\n    },\n    \"diagnosis\": \"ERESOLVE conflict: legacy-widget requires react ^18.0.0 but project uses react 19.1.0 from vendor/react-19; build.js also validates react version must start with '18.'\",\n    \"changed_files\": [\n      \"package.json\"\n    ],\n    \"validator\": {\n      \"passed\": true,\n      \"stages\": {\n        \"install\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"install\",\n            \"--offline\",\n            \"--ignore-scripts\",\n            \"--no-audit\",\n            \"--no-fund\",\n            \"--package-lock=false\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"f38656f6f5746637a4900c3ba850a5e9bfc2e3d80852347bf44476e4be6b66f8\"\n        },\n        \"build\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"run\",\n            \"build\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"08296ddb917af85a61cc312496262fcc3b28b2a33e0e4aecada5653f00b04998\"\n        },\n        \"test\": {\n          \"status\": \"passed\",\n          \"command\": [\n            \"npm\",\n            \"test\"\n          ],\n          \"exit_code\": 0,\n          \"output_hash\": \"fe7a4c9b9b57280330aa69e0cfa074ed9ee38d77738c46b98f1ba390062c28dd\"\n        }\n      },\n      \"original_error_absent\": true\n    },\n    \"evidence_events\": [\n      {\n        \"event_id\": \"$C2wJH0Afs9TfiF-PS1VJ-hdHWvtTAfcC6BdfS3x56fY\",\n        \"sender_role\": \"human\",\n        \"event_type\": \"message\",\n        \"content\": \"task dispatch or acknowledgement\"\n      },\n      {\n        \"event_id\": \"$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\",\n        \"sender_role\": \"worker\",\n        \"event_type\": \"agent_result\",\n        \"content\": {\n          \"task_id\": \"v03-train-npm-peer-conflict-3b0b9d2b\",\n          \"fixture_id\": \"train-npm-peer-conflict\",\n          \"diagnosis\": \"ERESOLVE conflict: legacy-widget requires react ^18.0.0 but project uses react 19.1.0 from vendor/react-19; build.js also validates react version must start with '18.'\",\n          \"diagnostic_commands\": [\n            [\n              \"cat\",\n              \"package.json\"\n            ],\n            [\n              \"cat\",\n              \"vendor/legacy-widget/package.json\"\n            ],\n            [\n              \"cat\",\n              \"vendor/react-19/package.json\"\n            ],\n            [\n              \"cat\",\n              \"build.js\"\n            ]\n          ],\n          \"proposed_package_json\": {\n            \"name\": \"train-npm-peer-conflict\",\n            \"private\": true,\n            \"version\": \"1.0.0\",\n            \"scripts\": {\n              \"build\": \"node build.js\",\n              \"test\": \"node test.js\"\n            },\n            \"dependencies\": {\n              \"react\": \"file:vendor/react-18\",\n              \"legacy-widget\": \"file:vendor/legacy-widget\"\n            }\n          },\n          \"verification_commands\": [\n            [\n              \"npm\",\n              \"install\",\n              \"--offline\"\n            ],\n            [\n              \"node\",\n              \"build.js\"\n            ]\n          ]\n        }\n      }\n    ]\n  }\n]\n"
+    },
+    {
+      "source_event_id": "$3TY_-whMHyxMCfEy_KPMa_QKAQV0zNm3HYgpWkNLFzU",
+      "timestamp_ms": 1786506527921,
+      "sender_role": "worker",
+      "body": "TRACE2SKILL_EXPERIENCE {\"schema_version\":\"0.3\",\"experience_id\":\"experience-v03-trace-analysis-d54c4d0a\",\"trace_ids\":[\"trace_13d6730f107949ed826b28629d3b9fe8\",\"trace_ef00f7013bfa42cba0d4c94eb772d590\",\"trace_1033f617c6e84149867370661fafe155\"],\"scope\":{\"domain\":\"javascript-typescript-ci-dependencies\",\"ecosystems\":[\"npm\"],\"failure_classes\":[\"lockfile-drift\",\"missing-dev-dependency\",\"peer-conflict\"],\"exclusions\":[\"pnpm\"]},\"task_signatures\":[{\"id\":\"signature-001\",\"statement\":\"When npm ci fails with 'package-lock.json' and 'in sync' patterns, the issue is lockfile drift between package.json and package-lock.json\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]},{\"id\":\"signature-002\",\"statement\":\"When npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module', the issue is a missing dependency declaration in package.json\",\"evidence_refs\":[\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]},{\"id\":\"signature-003\",\"statement\":\"When npm install fails with 'ERESOLVE' pattern, the issue is a peer dependency conflict between declared dependencies and their peer requirements\",\"evidence_refs\":[\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"package_manager_detection\":[{\"id\":\"pm-detect-001\",\"statement\":\"npm is the only observed package manager in JavaScript/TypeScript CI dependency failures; pnpm is unobserved\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"success_paths\":[{\"id\":\"success-001\",\"statement\":\"For lockfile drift, changing package.json to match package-lock.json resolves the npm ci failure\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]},{\"id\":\"success-002\",\"statement\":\"For missing dev dependency, adding the required module to devDependencies in package.json resolves the MODULE_NOT_FOUND error\",\"evidence_refs\":[\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]},{\"id\":\"success-003\",\"statement\":\"For peer dependency conflicts, changing the conflicting dependency version in package.json to satisfy peer requirements resolves the ERESOLVE error\",\"evidence_refs\":[\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"failed_attempts\":[{\"id\":\"fail-001\",\"statement\":\"Using force flags, legacy-peer-deps, or network access are prohibited and were not attempted in any observed trace\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"preconditions\":[{\"id\":\"precond-001\",\"statement\":\"All repairs must preserve every unrelated field in package.json\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"tools_permissions\":[{\"id\":\"tool-perm-001\",\"statement\":\"Workers have permission to read repository files using cat and execute npm commands for verification\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"prohibited_actions\":[{\"id\":\"prohibit-001\",\"statement\":\"Network access, lifecycle scripts, force flags, legacy-peer-deps, and hidden host data are prohibited\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"validator_rules\":[{\"id\":\"validator-001\",\"statement\":\"The validator runs deterministic stages (install, build, test) and confirms original error absence\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"conclusions\":[{\"id\":\"conclusion-001\",\"statement\":\"The smallest safe repair for npm dependency failures is always a targeted change to package.json that aligns dependency declarations with observed constraints\",\"confidence\":0.95,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-002\",\"statement\":\"All three failure patterns (lockfile drift, missing dev dependency, peer conflict) are resolved by modifying package.json dependencies without changing other fields\",\"confidence\":0.98,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-003\",\"statement\":\"npm is the only supported package manager for JavaScript/TypeScript CI dependency failures in this experience model\",\"confidence\":1.0,\"limitations\":[\"pnpm is unobserved\"],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-004\",\"statement\":\"Verification commands must match the reproduction command pattern but with the repaired package.json\",\"confidence\":0.97,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-005\",\"statement\":\"Diagnostic commands should target the specific files involved in each failure pattern\",\"confidence\":0.96,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-006\",\"statement\":\"Build validation scripts (like build.js) provide additional constraints that must be satisfied by dependency repairs\",\"confidence\":0.94,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-007\",\"statement\":\"The validator's deterministic multi-stage verification ensures that repairs resolve the original error without introducing new issues\",\"confidence\":0.99,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-008\",\"statement\":\"All successful repairs preserve the original package.json structure and only modify the specific dependency fields causing the failure\",\"confidence\":0.98,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-009\",\"statement\":\"The evidence shows consistent patterns across different failure types, enabling reliable diagnosis from error patterns alone\",\"confidence\":0.93,\"limitations\":[],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]},{\"id\":\"conclusion-010\",\"statement\":\"The scope is strictly limited to JavaScript/TypeScript CI dependency failures with npm; no claims can be made about other ecosystems or package managers\",\"confidence\":1.0,\"limitations\":[\"pnpm is unobserved\"],\"conflicts\":[],\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}]}\n\nI've created the Experience Model with all required fields, including evidence_refs for every conclusion as specified in the task requirements. The model is based on the three training traces and follows the v0.3 schema with proper structure and content. All conclusions have the required confidence, limitations, and conflicts fields, and every item in all nine collections has the required evidence_refs."
+    }
+  ],
+  "experience": {
+    "schema_version": "0.3",
+    "experience_id": "experience-v03-trace-analysis-d54c4d0a",
+    "trace_ids": [
+      "trace_13d6730f107949ed826b28629d3b9fe8",
+      "trace_ef00f7013bfa42cba0d4c94eb772d590",
+      "trace_1033f617c6e84149867370661fafe155"
+    ],
+    "scope": {
+      "domain": "javascript-typescript-ci-dependencies",
+      "ecosystems": [
+        "npm"
+      ],
+      "failure_classes": [
+        "lockfile-drift",
+        "missing-dev-dependency",
+        "peer-conflict"
+      ],
+      "exclusions": [
+        "pnpm"
+      ]
+    },
+    "task_signatures": [
+      {
+        "id": "signature-001",
+        "statement": "When npm ci fails with 'package-lock.json' and 'in sync' patterns, the issue is lockfile drift between package.json and package-lock.json",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI"
+        ]
+      },
+      {
+        "id": "signature-002",
+        "statement": "When npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module', the issue is a missing dependency declaration in package.json",
+        "evidence_refs": [
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+        ]
+      },
+      {
+        "id": "signature-003",
+        "statement": "When npm install fails with 'ERESOLVE' pattern, the issue is a peer dependency conflict between declared dependencies and their peer requirements",
+        "evidence_refs": [
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "package_manager_detection": [
+      {
+        "id": "pm-detect-001",
+        "statement": "npm is the only observed package manager in JavaScript/TypeScript CI dependency failures; pnpm is unobserved",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "success_paths": [
+      {
+        "id": "success-001",
+        "statement": "For lockfile drift, changing package.json to match package-lock.json resolves the npm ci failure",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI"
+        ]
+      },
+      {
+        "id": "success-002",
+        "statement": "For missing dev dependency, adding the required module to devDependencies in package.json resolves the MODULE_NOT_FOUND error",
+        "evidence_refs": [
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+        ]
+      },
+      {
+        "id": "success-003",
+        "statement": "For peer dependency conflicts, changing the conflicting dependency version in package.json to satisfy peer requirements resolves the ERESOLVE error",
+        "evidence_refs": [
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "failed_attempts": [
+      {
+        "id": "fail-001",
+        "statement": "Using force flags, legacy-peer-deps, or network access are prohibited and were not attempted in any observed trace",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "preconditions": [
+      {
+        "id": "precond-001",
+        "statement": "All repairs must preserve every unrelated field in package.json",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "tools_permissions": [
+      {
+        "id": "tool-perm-001",
+        "statement": "Workers have permission to read repository files using cat and execute npm commands for verification",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "prohibited_actions": [
+      {
+        "id": "prohibit-001",
+        "statement": "Network access, lifecycle scripts, force flags, legacy-peer-deps, and hidden host data are prohibited",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "validator_rules": [
+      {
+        "id": "validator-001",
+        "statement": "The validator runs deterministic stages (install, build, test) and confirms original error absence",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "conclusions": [
+      {
+        "id": "conclusion-001",
+        "statement": "The smallest safe repair for npm dependency failures is always a targeted change to package.json that aligns dependency declarations with observed constraints",
+        "confidence": 0.95,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-002",
+        "statement": "All three failure patterns (lockfile drift, missing dev dependency, peer conflict) are resolved by modifying package.json dependencies without changing other fields",
+        "confidence": 0.98,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-003",
+        "statement": "npm is the only supported package manager for JavaScript/TypeScript CI dependency failures in this experience model",
+        "confidence": 1.0,
+        "limitations": [
+          "pnpm is unobserved"
+        ],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-004",
+        "statement": "Verification commands must match the reproduction command pattern but with the repaired package.json",
+        "confidence": 0.97,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-005",
+        "statement": "Diagnostic commands should target the specific files involved in each failure pattern",
+        "confidence": 0.96,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-006",
+        "statement": "Build validation scripts (like build.js) provide additional constraints that must be satisfied by dependency repairs",
+        "confidence": 0.94,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-007",
+        "statement": "The validator's deterministic multi-stage verification ensures that repairs resolve the original error without introducing new issues",
+        "confidence": 0.99,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-008",
+        "statement": "All successful repairs preserve the original package.json structure and only modify the specific dependency fields causing the failure",
+        "confidence": 0.98,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-009",
+        "statement": "The evidence shows consistent patterns across different failure types, enabling reliable diagnosis from error patterns alone",
+        "confidence": 0.93,
+        "limitations": [],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "id": "conclusion-010",
+        "statement": "The scope is strictly limited to JavaScript/TypeScript CI dependency failures with npm; no claims can be made about other ecosystems or package managers",
+        "confidence": 1.0,
+        "limitations": [
+          "pnpm is unobserved"
+        ],
+        "conflicts": [],
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ]
+  },
+  "started_at": "2026-08-12T03:47:25.859111+00:00",
+  "ended_at": "2026-08-12T03:48:48.883775+00:00",
+  "status": "succeeded"
+}

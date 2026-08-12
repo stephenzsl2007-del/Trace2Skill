@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trace2skill.dev/schemas/candidate-skill-0.1.0.json",
+  "title": "Trace2Skill Candidate Skill Analysis",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "candidate_id", "status", "source_trace_ids", "task_signature", "skill", "evidence", "confidence", "security"],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "candidate_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9._:-]+$" },
+    "status": { "const": "candidate" },
+    "source_trace_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+    "task_signature": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "package_manager", "failure"],
+      "properties": {
+        "kind": { "type": "string" },
+        "package_manager": { "enum": ["npm", "pnpm", "yarn"] },
+        "failure": { "type": "string" }
+      }
+    },
+    "skill": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "triggers", "preconditions", "steps", "guardrails", "verification"],
+      "properties": {
+        "name": { "const": "diagnose-javascript-dependency-failures" },
+        "triggers": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "preconditions": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "steps": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/step" } },
+        "guardrails": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "verification": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["successful_path_event_ids", "diagnostic_recommendations", "failure_lessons"],
+      "properties": {
+        "successful_path_event_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "diagnostic_recommendations": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/recommendation" } },
+        "failure_lessons": { "type": "array", "items": { "$ref": "#/$defs/failureLesson" } }
+      }
+    },
+    "confidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "level", "factors", "limitations"],
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "level": { "enum": ["low", "medium", "high"] },
+        "factors": { "type": "array", "items": { "type": "string" } },
+        "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["raw_payloads_copied", "source_secret_scan_passed", "contains_chain_of_thought"],
+      "properties": {
+        "raw_payloads_copied": { "const": false },
+        "source_secret_scan_passed": { "const": true },
+        "contains_chain_of_thought": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "instruction", "evidence_type", "evidence_event_ids"],
+      "properties": {
+        "id": { "type": "string" },
+        "instruction": { "type": "string" },
+        "evidence_type": { "enum": ["observed", "template"] },
+        "evidence_event_ids": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "recommendation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["command", "selected", "actor_role", "evidence_event_ids"],
+      "properties": {
+        "command": { "type": "string" },
+        "selected": { "type": "boolean" },
+        "actor_role": { "enum": ["manager", "worker"] },
+        "evidence_event_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    },
+    "failureLesson": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "count", "evidence_event_ids"],
+      "properties": {
+        "category": { "enum": ["missing-required-input", "missing-artifact", "invalid-path", "command-failure", "unknown-tool-error"] },
+        "count": { "type": "integer", "minimum": 1 },
+        "evidence_event_ids": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    }
+  }
+}

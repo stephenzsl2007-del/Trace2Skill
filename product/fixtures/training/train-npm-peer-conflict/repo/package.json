@@ -1,0 +1,1 @@
+{"name":"train-npm-peer-conflict","private":true,"version":"1.0.0","scripts":{"build":"node build.js","test":"node test.js"},"dependencies":{"react":"file:vendor/react-19","legacy-widget":"file:vendor/legacy-widget"}}

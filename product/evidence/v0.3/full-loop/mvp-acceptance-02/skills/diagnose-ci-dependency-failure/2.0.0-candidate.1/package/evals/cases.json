@@ -1,0 +1,30 @@
+{
+  "schema_version": "0.3",
+  "cases": [
+    {
+      "name": "npm lockfile drift detection and repair",
+      "failure_class": "lockfile-drift",
+      "expected": "validator-pass"
+    },
+    {
+      "name": "pnpm lockfile drift detection and repair",
+      "failure_class": "lockfile-drift",
+      "expected": "validator-pass"
+    },
+    {
+      "name": "npm missing dev dependency detection and repair",
+      "failure_class": "missing-dev-dependency",
+      "expected": "validator-pass"
+    },
+    {
+      "name": "pnpm missing dev dependency detection and repair",
+      "failure_class": "missing-dev-dependency",
+      "expected": "validator-pass"
+    },
+    {
+      "name": "npm peer dependency conflict detection and repair",
+      "failure_class": "peer-conflict",
+      "expected": "validator-pass"
+    }
+  ]
+}

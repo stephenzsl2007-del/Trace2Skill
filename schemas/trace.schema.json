@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trace2skill.dev/schemas/trace-0.1.0.json",
+  "title": "Trace2Skill Execution Trace",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "trace_id",
+    "task",
+    "run",
+    "actors",
+    "events",
+    "artifacts",
+    "validation",
+    "metrics",
+    "security"
+  ],
+  "properties": {
+    "schema_version": { "const": "0.1.0" },
+    "trace_id": { "type": "string", "pattern": "^[a-zA-Z0-9._:-]+$" },
+    "task": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "title", "kind", "input", "source"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "title": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "minLength": 1 },
+        "input": { "type": "object" },
+        "source": { "enum": ["agentteams", "github", "sandbox", "synthetic"] }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["framework", "framework_version", "started_at", "ended_at", "status"],
+      "properties": {
+        "framework": { "const": "AgentTeams" },
+        "framework_version": { "type": "string" },
+        "started_at": { "type": "string", "format": "date-time" },
+        "ended_at": { "type": "string", "format": "date-time" },
+        "status": { "enum": ["success", "failed", "partial", "cancelled"] }
+      }
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/actor" }
+    },
+    "events": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/event" }
+    },
+    "artifacts": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/artifact" }
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["passed", "checks"],
+      "properties": {
+        "passed": { "type": "boolean" },
+        "checks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/check" }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["event_count", "message_count", "tool_call_count", "tool_error_count", "duration_ms"],
+      "properties": {
+        "event_count": { "type": "integer", "minimum": 0 },
+        "message_count": { "type": "integer", "minimum": 0 },
+        "tool_call_count": { "type": "integer", "minimum": 0 },
+        "tool_error_count": { "type": "integer", "minimum": 0 },
+        "duration_ms": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contains_chain_of_thought", "redaction_applied", "secret_scan_passed"],
+      "properties": {
+        "contains_chain_of_thought": { "const": false },
+        "redaction_applied": { "type": "boolean" },
+        "secret_scan_passed": { "type": "boolean" }
+      }
+    }
+  },
+  "$defs": {
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role", "runtime", "model"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "role": { "enum": ["human", "manager", "worker", "system"] },
+        "runtime": { "type": ["string", "null"] },
+        "model": { "type": ["string", "null"] }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sequence", "event_id", "timestamp", "type", "actor_id", "task_id", "payload", "provenance"],
+      "properties": {
+        "sequence": { "type": "integer", "minimum": 1 },
+        "event_id": { "type": "string", "minLength": 1 },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "type": {
+          "enum": [
+            "task_received",
+            "task_dispatched",
+            "task_acknowledged",
+            "agent_message",
+            "tool_call",
+            "tool_result",
+            "tool_error",
+            "task_submitted",
+            "task_completed",
+            "validation_result"
+          ]
+        },
+        "actor_id": { "type": "string" },
+        "task_id": { "type": "string" },
+        "call_id": { "type": ["string", "null"] },
+        "payload": { "type": "object" },
+        "provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["source", "room_id", "source_event_id"],
+          "properties": {
+            "source": { "const": "matrix" },
+            "room_id": { "type": "string" },
+            "source_event_id": { "type": "string" }
+          }
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "uri", "content_hash", "produced_by_event_id"],
+      "properties": {
+        "kind": { "enum": ["task_spec", "task_meta", "result", "patch", "log", "validator_output"] },
+        "uri": { "type": "string" },
+        "content_hash": { "type": ["string", "null"] },
+        "produced_by_event_id": { "type": ["string", "null"] }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "passed", "evidence_event_ids"],
+      "properties": {
+        "name": { "type": "string" },
+        "passed": { "type": "boolean" },
+        "evidence_event_ids": { "type": "array", "items": { "type": "string" } },
+        "details": { "type": "string" }
+      }
+    }
+  }
+}

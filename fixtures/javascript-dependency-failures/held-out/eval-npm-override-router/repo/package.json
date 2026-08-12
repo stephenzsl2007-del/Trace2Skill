@@ -1,0 +1,1 @@
+{"name":"eval-npm-override-router","private":true,"version":"1.0.0","dependencies":{"router-lib":"file:vendor/router-lib"},"overrides":{"router-lib":"6.2.0"}}

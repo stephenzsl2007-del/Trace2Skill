@@ -1,0 +1,19 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+  .:
+    dependencies:
+      frozen-lib:
+        specifier: file:vendor/frozen-lib-v1
+        version: file:vendor/frozen-lib-v1
+
+packages:
+  frozen-lib@file:vendor/frozen-lib-v1:
+    resolution: {directory: vendor/frozen-lib-v1, type: directory}
+
+snapshots:
+  frozen-lib@file:vendor/frozen-lib-v1: {}

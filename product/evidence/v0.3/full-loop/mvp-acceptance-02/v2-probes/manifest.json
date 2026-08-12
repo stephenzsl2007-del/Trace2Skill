@@ -1,0 +1,25 @@
+{
+  "schema_version": "0.3",
+  "skill_version": "2.0.0-candidate.1",
+  "records": [
+    {
+      "fixture_id": "heldout-npm-peer-conflict",
+      "passed": true,
+      "trace": "heldout-npm-peer-conflict.trace.json",
+      "failure_report": null
+    },
+    {
+      "fixture_id": "heldout-pnpm-frozen-lockfile",
+      "passed": true,
+      "trace": "heldout-pnpm-frozen-lockfile.trace.json",
+      "failure_report": null
+    },
+    {
+      "fixture_id": "heldout-pnpm-missing-build-dependency",
+      "passed": true,
+      "trace": "heldout-pnpm-missing-build-dependency.trace.json",
+      "failure_report": null
+    }
+  ],
+  "gate_passed": true
+}

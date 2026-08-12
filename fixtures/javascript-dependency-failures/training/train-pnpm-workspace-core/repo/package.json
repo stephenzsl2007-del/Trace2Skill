@@ -1,0 +1,1 @@
+{"name":"train-pnpm-workspace-core","private":true,"version":"1.0.0","dependencies":{"@fixture/core-missing":"workspace:*"}}

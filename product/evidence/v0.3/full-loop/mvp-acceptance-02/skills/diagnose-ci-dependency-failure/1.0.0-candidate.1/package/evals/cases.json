@@ -1,0 +1,20 @@
+{
+  "schema_version": "0.3",
+  "cases": [
+    {
+      "name": "lockfile drift detection and repair",
+      "failure_class": "lockfile-drift",
+      "expected": "validator-pass"
+    },
+    {
+      "name": "missing dev dependency detection and repair",
+      "failure_class": "missing-dev-dependency",
+      "expected": "validator-pass"
+    },
+    {
+      "name": "peer dependency conflict detection and repair",
+      "failure_class": "peer-conflict",
+      "expected": "validator-pass"
+    }
+  ]
+}

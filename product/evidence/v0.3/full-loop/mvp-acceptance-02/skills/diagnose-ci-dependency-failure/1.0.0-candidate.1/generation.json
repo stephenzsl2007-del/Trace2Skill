@@ -1,0 +1,143 @@
+{
+  "schema_version": "0.3",
+  "generation_id": "skillgen_43f37c9e85eb4d8a8ab0b4746b7cb0a3",
+  "task_id": "v03-skill-v1-1f81c10e",
+  "role": "skill-engineer",
+  "role_spec_hash": "3a8329470fbb16ace33ab7cc33cb650536a74066f304265ec24edd3502cea701",
+  "experience_id": "experience-v03-trace-analysis-d54c4d0a",
+  "experience_hash": "406382baf1c9c61b3f3f1fa92775c18c3676e9330e36912625adadcf1d6ff397",
+  "assignment": {
+    "task_id": "v03-skill-v1-1f81c10e",
+    "room_id": "!Sw5r7OsamxXaoJ4EbZ:matrix-local.hiclaw.io:18080",
+    "assigned_at": "2026-08-12T03:48:49.483069+00:00",
+    "request_event_id": "$weU768nLzurd6UJtzT3gOtUYu7z_vaYVIdD40N8BZxI"
+  },
+  "messages": [
+    {
+      "source_event_id": "$weU768nLzurd6UJtzT3gOtUYu7z_vaYVIdD40N8BZxI",
+      "timestamp_ms": 1786506530273,
+      "sender_role": "human",
+      "body": "@skill-worker:matrix-local.hiclaw.io:18080 New finite task [v03-skill-v1-1f81c10e]: generate Skill v1 from validated Experience. The exact shared task specification is included below. Execute it now and return the required bounded result; taskflow acknowledgement is optional for this MVP.\n\n# Trace2Skill v0.3 Skill v1 generation\n\nTASK ID: v03-skill-v1-1f81c10e\nROLE SPEC HASH: 3a8329470fbb16ace33ab7cc33cb650536a74066f304265ec24edd3502cea701\nMODEL: qwen-plus\nSKILL NAME: diagnose-ci-dependency-failure\nVERSION: 1.0.0-candidate.1\n\nDesign a concise Skill blueprint from only the validated Experience Model below. A deterministic host compiler will turn the blueprint into the six-file Skill package, so do not write Markdown files, Python source, or JSON-encoded file contents.\nThe training evidence observed npm only. Do not add support for unobserved package managers, held-out details, reference patches, bypass fixes, network-dependent fixes, or other ecosystems.\n\nReturn exactly `TRACE2SKILL_SKILL_BLUEPRINT ` followed by one JSON object:\n\n{\n  \"task_id\": \"v03-skill-v1-1f81c10e\",\n  \"description\": \"one-line npm trigger description\",\n  \"trigger_conditions\": [\"...\"],\n  \"preconditions\": [\"...\"],\n  \"diagnostic_workflow\": [\"...\"],\n  \"tool_requirements\": [\"...\"],\n  \"prohibited_actions\": [\"...\"],\n  \"validation_rules\": [\"...\"],\n  \"decision_tree\": [{\"when\":\"observable condition\",\"then\":\"safe action\",\"evidence_refs\":[\"...\"]}],\n  \"failure_patterns\": [{\"signature\":\"observable error\",\"diagnosis\":\"...\",\"repair\":\"...\",\"evidence_refs\":[\"...\"]}],\n  \"eval_scenarios\": [{\"name\":\"generic scenario name\",\"failure_class\":\"lockfile-drift|missing-dev-dependency|peer-conflict\"}],\n  \"evidence_refs\": [\"...\"]\n}\n\nUse only evidence references from this allow-list: [\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\", \"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\", \"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]. Preserve prohibitions against force, legacy-peer-deps, lifecycle scripts, network access, hidden host data, and unrelated file changes. Keep the workflow limited to npm. Do not use Markdown fences or add commentary after the JSON.\n\nVALIDATED ACTIONABLE EXPERIENCE VIEW\n\n{\"experience_id\":\"experience-v03-trace-analysis-d54c4d0a\",\"trace_ids\":[\"trace_13d6730f107949ed826b28629d3b9fe8\",\"trace_ef00f7013bfa42cba0d4c94eb772d590\",\"trace_1033f617c6e84149867370661fafe155\"],\"scope\":{\"domain\":\"javascript-typescript-ci-dependencies\",\"ecosystems\":[\"npm\"],\"failure_classes\":[\"lockfile-drift\",\"missing-dev-dependency\",\"peer-conflict\"],\"exclusions\":[\"pnpm\"]},\"task_signatures\":[{\"id\":\"signature-001\",\"statement\":\"When npm ci fails with 'package-lock.json' and 'in sync' patterns, the issue is lockfile drift between package.json and package-lock.json\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]},{\"id\":\"signature-002\",\"statement\":\"When npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module', the issue is a missing dependency declaration in package.json\",\"evidence_refs\":[\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]},{\"id\":\"signature-003\",\"statement\":\"When npm install fails with 'ERESOLVE' pattern, the issue is a peer dependency conflict between declared dependencies and their peer requirements\",\"evidence_refs\":[\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"success_paths\":[{\"id\":\"success-001\",\"statement\":\"For lockfile drift, changing package.json to match package-lock.json resolves the npm ci failure\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]},{\"id\":\"success-002\",\"statement\":\"For missing dev dependency, adding the required module to devDependencies in package.json resolves the MODULE_NOT_FOUND error\",\"evidence_refs\":[\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]},{\"id\":\"success-003\",\"statement\":\"For peer dependency conflicts, changing the conflicting dependency version in package.json to satisfy peer requirements resolves the ERESOLVE error\",\"evidence_refs\":[\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"preconditions\":[{\"id\":\"precond-001\",\"statement\":\"All repairs must preserve every unrelated field in package.json\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"tools_permissions\":[{\"id\":\"tool-perm-001\",\"statement\":\"Workers have permission to read repository files using cat and execute npm commands for verification\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"prohibited_actions\":[{\"id\":\"prohibit-001\",\"statement\":\"Network access, lifecycle scripts, force flags, legacy-peer-deps, and hidden host data are prohibited\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}],\"validator_rules\":[{\"id\":\"validator-001\",\"statement\":\"The validator runs deterministic stages (install, build, test) and confirms original error absence\",\"evidence_refs\":[\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\",\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\",\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}]}\n"
+    },
+    {
+      "source_event_id": "$3P1uL-BIHNJcIR4dcvU467MEoIh8GiMfcU5uj-7YeD4",
+      "timestamp_ms": 1786506583283,
+      "sender_role": "worker",
+      "body": "TRACE2SKILL_SKILL_BLUEPRINT {\"task_id\": \"v03-skill-v1-1f81c10e\", \"description\": \"Diagnose and repair npm CI dependency failures from error patterns\", \"trigger_conditions\": [\"npm ci fails with 'package-lock.json' and 'in sync' patterns\", \"npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'\", \"npm install fails with 'ERESOLVE' pattern\"], \"preconditions\": [\"package.json and package-lock.json are present\", \"npm is the detected package manager\", \"No network access, force flags, or legacy-peer-deps are used\"], \"diagnostic_workflow\": [\"Read package.json and package-lock.json\", \"Run npm ci --dry-run to detect lockfile drift\", \"Run npm list <missing-module> to verify missing dev dependency\", \"Run npm install --dry-run to surface peer conflict\"], \"tool_requirements\": [\"cat\", \"npm\"], \"prohibited_actions\": [\"Use of force flags (e.g., --force)\", \"Use of legacy-peer-deps\", \"Execution of lifecycle scripts (e.g., preinstall, postinstall)\", \"Network access during diagnosis/repair\", \"Modification of any field in package.json beyond dependency declarations\", \"Support for pnpm or other unobserved package managers\"], \"validation_rules\": [\"Repaired package.json must pass npm ci without error\", \"All deterministic validation stages (install, build, test) must succeed\", \"Original failure must be absent after repair\", \"No unrelated fields in package.json may change\"], \"decision_tree\": [{\"when\": \"npm ci fails with 'package-lock.json' and 'in sync' patterns\", \"then\": \"Align package.json dependencies with package-lock.json versions\", \"evidence_refs\": [\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]}, {\"when\": \"npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'\", \"then\": \"Add missing module to devDependencies in package.json\", \"evidence_refs\": [\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]}, {\"when\": \"npm install fails with 'ERESOLVE' pattern\", \"then\": \"Adjust conflicting dependency version in package.json to satisfy peer requirements\", \"evidence_refs\": [\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}], \"failure_patterns\": [{\"signature\": \"npm ci.*package-lock.json.*in sync\", \"diagnosis\": \"lockfile drift between package.json and package-lock.json\", \"repair\": \"Update package.json dependency versions to match package-lock.json\", \"evidence_refs\": [\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]}, {\"signature\": \"MODULE_NOT_FOUND.*Cannot find module\", \"diagnosis\": \"missing dev dependency declaration in package.json\", \"repair\": \"Add required module to devDependencies in package.json\", \"evidence_refs\": [\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]}, {\"signature\": \"ERESOLVE\", \"diagnosis\": \"peer dependency conflict between declared dependencies and their peer requirements\", \"repair\": \"Change conflicting dependency version in package.json to satisfy peer requirements\", \"evidence_refs\": [\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}], \"eval_scenarios\": [{\"name\": \"lockfile drift detection and repair\", \"failure_class\": \"lockfile-drift\"}, {\"name\": \"missing dev dependency detection and repair\", \"failure_class\": \"missing-dev-dependency\"}, {\"name\": \"peer dependency conflict detection and repair\", \"failure_class\": \"peer-conflict\"}], \"evidence_refs\": [\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\", \"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\", \"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]}"
+    }
+  ],
+  "skill_name": "diagnose-ci-dependency-failure",
+  "version": "1.0.0-candidate.1",
+  "manifest_hash": "ca608c29f5462952a5efb6131496dff8e67f5a5ad5e2375d36489aa35b99c497",
+  "blueprint": {
+    "task_id": "v03-skill-v1-1f81c10e",
+    "description": "Diagnose and repair npm CI dependency failures from error patterns",
+    "trigger_conditions": [
+      "npm ci fails with 'package-lock.json' and 'in sync' patterns",
+      "npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'",
+      "npm install fails with 'ERESOLVE' pattern"
+    ],
+    "preconditions": [
+      "package.json and package-lock.json are present",
+      "npm is the detected package manager",
+      "No network access, force flags, or legacy-peer-deps are used"
+    ],
+    "diagnostic_workflow": [
+      "Read package.json and package-lock.json",
+      "Run npm ci --dry-run to detect lockfile drift",
+      "Run npm list <missing-module> to verify missing dev dependency",
+      "Run npm install --dry-run to surface peer conflict"
+    ],
+    "tool_requirements": [
+      "cat",
+      "npm"
+    ],
+    "prohibited_actions": [
+      "Use of force flags (e.g., --force)",
+      "Use of legacy-peer-deps",
+      "Execution of lifecycle scripts (e.g., preinstall, postinstall)",
+      "Network access during diagnosis/repair",
+      "Modification of any field in package.json beyond dependency declarations",
+      "Do not use package managers that were not observed in the training Trace.",
+      "Do not modify unrelated files or fields.",
+      "Do not access hidden host data or private Validator configuration."
+    ],
+    "validation_rules": [
+      "Repaired package.json must pass npm ci without error",
+      "All deterministic validation stages (install, build, test) must succeed",
+      "Original failure must be absent after repair",
+      "No unrelated fields in package.json may change"
+    ],
+    "decision_tree": [
+      {
+        "when": "npm ci fails with 'package-lock.json' and 'in sync' patterns",
+        "then": "Align package.json dependencies with package-lock.json versions",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI"
+        ]
+      },
+      {
+        "when": "npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'",
+        "then": "Add missing module to devDependencies in package.json",
+        "evidence_refs": [
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+        ]
+      },
+      {
+        "when": "npm install fails with 'ERESOLVE' pattern",
+        "then": "Adjust conflicting dependency version in package.json to satisfy peer requirements",
+        "evidence_refs": [
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "failure_patterns": [
+      {
+        "signature": "npm ci.*package-lock.json.*in sync",
+        "diagnosis": "lockfile drift between package.json and package-lock.json",
+        "repair": "Update package.json dependency versions to match package-lock.json",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI"
+        ]
+      },
+      {
+        "signature": "MODULE_NOT_FOUND.*Cannot find module",
+        "diagnosis": "missing dev dependency declaration in package.json",
+        "repair": "Add required module to devDependencies in package.json",
+        "evidence_refs": [
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+        ]
+      },
+      {
+        "signature": "ERESOLVE",
+        "diagnosis": "peer dependency conflict between declared dependencies and their peer requirements",
+        "repair": "Change conflicting dependency version in package.json to satisfy peer requirements",
+        "evidence_refs": [
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      }
+    ],
+    "eval_scenarios": [
+      {
+        "name": "lockfile drift detection and repair",
+        "failure_class": "lockfile-drift"
+      },
+      {
+        "name": "missing dev dependency detection and repair",
+        "failure_class": "missing-dev-dependency"
+      },
+      {
+        "name": "peer dependency conflict detection and repair",
+        "failure_class": "peer-conflict"
+      }
+    ],
+    "evidence_refs": [
+      "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc",
+      "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+      "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+    ]
+  },
+  "started_at": "2026-08-12T03:48:49.483069+00:00",
+  "ended_at": "2026-08-12T03:49:44.176003+00:00",
+  "status": "succeeded"
+}

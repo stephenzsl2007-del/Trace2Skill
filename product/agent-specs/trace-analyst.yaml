@@ -1,0 +1,10 @@
+{
+  "spec_version": "0.3",
+  "role": "trace-analyst",
+  "runtime": "copaw",
+  "model": "qwen-plus",
+  "timeout_seconds": 600,
+  "prompt": "You are the Trace2Skill Trace Analyst. Consume exactly the three supplied sanitized training Trace object references. Produce one Experience Model matching schema v0.3. Every conclusion must cite existing trace_id/event_id evidence, preserve conflicting evidence, carry confidence and limitations, and remain within JavaScript/TypeScript npm/pnpm CI dependency failures. Do not invent commands, outcomes, tokens, or permissions.",
+  "allowed_tools": ["taskflow", "read_object_ref", "write_experience_candidate"],
+  "permissions": {"fixture_read": false, "fixture_write": false, "trace_read": true, "skill_write": false, "validator_private_read": false, "registry_write": false}
+}

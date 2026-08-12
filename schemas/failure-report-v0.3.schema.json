@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trace2skill.local/schemas/failure-report-v0.3.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "fixture_id", "failed_stage", "command", "exit_code", "error_category", "output_hash", "evidence_refs"],
+  "properties": {
+    "schema_version": {"const": "0.3"},
+    "fixture_id": {"type": "string"},
+    "failed_stage": {"enum": ["reproduce", "install", "build", "test", "safety"]},
+    "command": {"type": "array", "items": {"type": "string"}},
+    "exit_code": {"type": "integer"},
+    "error_category": {"type": "string"},
+    "output_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "evidence_refs": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trace2skill.local/schemas/trace-event-v0.3.schema.json",
+  "title": "Trace2Skill Trace Event v0.3",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "event_id",
+    "sequence",
+    "run_id",
+    "task_id",
+    "agent_id",
+    "phase",
+    "event_type",
+    "timestamp",
+    "tool",
+    "input_ref",
+    "output_ref",
+    "status",
+    "token_usage",
+    "evidence_refs"
+  ],
+  "properties": {
+    "schema_version": {"const": "0.3"},
+    "event_id": {"type": "string", "pattern": "^evt_[a-f0-9]{32}$"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "run_id": {"type": "string", "minLength": 1},
+    "task_id": {"type": "string", "minLength": 1},
+    "agent_id": {"type": "string", "minLength": 1},
+    "phase": {"type": "string", "minLength": 1},
+    "event_type": {"type": "string", "minLength": 1},
+    "timestamp": {"type": "string", "format": "date-time"},
+    "tool": {"type": ["string", "null"]},
+    "input_ref": {"type": ["string", "null"]},
+    "output_ref": {"type": ["string", "null"]},
+    "status": {"type": "string", "minLength": 1},
+    "token_usage": {
+      "oneOf": [
+        {"type": "null"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "input_tokens": {"type": "integer", "minimum": 0},
+            "output_tokens": {"type": "integer", "minimum": 0},
+            "total_tokens": {"type": "integer", "minimum": 0}
+          }
+        }
+      ]
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+      "uniqueItems": true
+    }
+  }
+}

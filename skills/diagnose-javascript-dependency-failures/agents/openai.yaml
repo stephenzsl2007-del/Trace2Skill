@@ -1,0 +1,4 @@
+interface:
+  display_name: "Diagnose JS Dependency Failures"
+  short_description: "Evidence-guided JavaScript dependency failure triage"
+  default_prompt: "Use $diagnose-javascript-dependency-failures to triage this JavaScript dependency resolution failure safely."

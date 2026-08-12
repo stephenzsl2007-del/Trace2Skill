@@ -1,0 +1,47 @@
+{
+  "schema_version": "0.3",
+  "started_at": "2026-08-12T04:59:52.187530+00:00",
+  "status": "succeeded",
+  "run_id": "run_d7eb289b85384c0482ec7760442a5f59",
+  "idempotency_verified": true,
+  "final_run": {
+    "id": "run_d7eb289b85384c0482ec7760442a5f59",
+    "kind": "full-loop",
+    "phase": "completed",
+    "status": "succeeded",
+    "idempotency_key": "api-acceptance-20260812T045952Z",
+    "config_hash": "5b1eede97fb48442b9f162fdc24a6bf8eb99e5e9fe9c0a3851d5f6d23596b0cb",
+    "failure_reason": null,
+    "created_at": "2026-08-12T04:59:52.219589Z",
+    "updated_at": "2026-08-12T05:10:33.720776Z",
+    "request": {
+      "config": {
+        "consumer_worker": "consumer-worker",
+        "execution_worker": "trace-worker",
+        "skill_worker": "skill-worker",
+        "task_timeout": 240
+      },
+      "fixture_ids": [],
+      "kind": "full-loop"
+    }
+  },
+  "event_count": 19,
+  "event_sequence_contiguous": true,
+  "trace_count": 10,
+  "skills": [
+    {
+      "name": "diagnose-ci-dependency-failure",
+      "version": "2.0.0-candidate.1",
+      "status": "qualified",
+      "manifest_hash": "bfb9f80fab6390bf25849b8e6ef66424e0afb440351200ce1552120682491813"
+    },
+    {
+      "name": "diagnose-ci-dependency-failure",
+      "version": "1.0.0-candidate.1",
+      "status": "failed",
+      "manifest_hash": "191f4e9e4e565fcb8bde0da55d23e5a2e3ef80fead6919866799f21ca8dcdf93"
+    }
+  ],
+  "run_state_path": "C:\\Users\\25746\\Documents\\ChatGPT\\GOAI\\product\\runs\\run_d7eb289b85384c0482ec7760442a5f59\\run.json",
+  "ended_at": "2026-08-12T05:10:33.790993+00:00"
+}

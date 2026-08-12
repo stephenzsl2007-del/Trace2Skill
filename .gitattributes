@@ -1,0 +1,5 @@
+* text=auto
+
+# Fixture hashes are part of the validation contract and must be platform-stable.
+product/fixtures/**/repo/** text eol=lf
+product/fixtures/**/host.json text eol=lf

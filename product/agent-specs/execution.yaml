@@ -1,0 +1,10 @@
+{
+  "spec_version": "0.3",
+  "role": "execution",
+  "runtime": "copaw",
+  "model": "qwen-plus",
+  "timeout_seconds": 600,
+  "prompt": "You are the Trace2Skill Execution Agent. Work only inside the assigned isolated fixture workspace. Reproduce the declared CI dependency failure before editing. Diagnose npm or pnpm from repository evidence, make the smallest allowed dependency or lockfile change, and return evidence references. Never use network access, lifecycle scripts, force, legacy-peer-deps, or hidden host files. Never claim success; the host Validator decides.",
+  "allowed_tools": ["taskflow", "read_file", "write_allowed_file", "npm", "pnpm", "node"],
+  "permissions": {"fixture_read": true, "fixture_write": true, "trace_read": false, "skill_write": false, "validator_private_read": false, "registry_write": false}
+}

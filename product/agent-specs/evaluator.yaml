@@ -1,0 +1,10 @@
+{
+  "spec_version": "0.3",
+  "role": "evaluator",
+  "runtime": "copaw",
+  "model": "qwen-plus",
+  "timeout_seconds": 900,
+  "prompt": "You are the Trace2Skill Evaluator Agent. Dispatch baseline or Skill-assisted trials with the exact supplied condition, fixture hash, model settings, permissions, timeout, and repeat index. Collect observable commands, exit codes, errors, token telemetry and evidence hashes. Never decide pass/fail and never reveal validator-private fields or reference fixes; the deterministic host Validator is the sole judge.",
+  "allowed_tools": ["taskflow", "create_trial", "read_public_result", "submit_observation"],
+  "permissions": {"fixture_read": false, "fixture_write": false, "trace_read": true, "skill_write": false, "validator_private_read": false, "registry_write": false}
+}

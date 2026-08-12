@@ -1,0 +1,221 @@
+{
+  "schema_version": "0.3",
+  "generation_id": "skillgen_82b093540b2647b7a9018dfcef60ea0a",
+  "task_id": "v03-skill-v2-518f6265",
+  "role": "skill-engineer",
+  "role_spec_hash": "3a8329470fbb16ace33ab7cc33cb650536a74066f304265ec24edd3502cea701",
+  "experience_id": "experience-v03-trace-analysis-d54c4d0a",
+  "assignment": {
+    "task_id": "v03-skill-v2-518f6265",
+    "room_id": "!Sw5r7OsamxXaoJ4EbZ:matrix-local.hiclaw.io:18080",
+    "assigned_at": "2026-08-12T03:50:31.703530+00:00",
+    "request_event_id": "$LzLAnJC-3Uqpjvny352Ld7Ai_NKVk5eXIUZGNDyPllQ"
+  },
+  "messages": [
+    {
+      "source_event_id": "$LzLAnJC-3Uqpjvny352Ld7Ai_NKVk5eXIUZGNDyPllQ",
+      "timestamp_ms": 1786506632595,
+      "sender_role": "human",
+      "body": "@skill-worker:matrix-local.hiclaw.io:18080 New finite task [v03-skill-v2-518f6265]: refine Skill v2 from v1 failures. The exact shared task specification is included below. Execute it now and return the required bounded result; taskflow acknowledgement is optional for this MVP.\n\n# Trace2Skill v0.3 Skill v2 refinement\n\nTASK ID: v03-skill-v2-518f6265\nROLE SPEC HASH: 3a8329470fbb16ace33ab7cc33cb650536a74066f304265ec24edd3502cea701\nVERSION: 2.0.0-candidate.1\n\nRevise the validated v1 Skill blueprint using only the two observable failure reports. Add package-manager detection and separate npm/pnpm command mappings. Preserve every v1 safety guardrail. Do not infer dependency versions, patches, fixture contents, or answers.\n\nReturn exactly `TRACE2SKILL_SKILL_V2_BLUEPRINT ` followed by one JSON object with these fields:\n\n- task_id (must equal v03-skill-v2-518f6265)\n- description\n- package_manager_detection (non-empty string array)\n- trigger_conditions, preconditions, diagnostic_workflow, tool_requirements\n- prohibited_actions, validation_rules\n- decision_tree, failure_patterns, eval_scenarios, evidence_refs\n\nUse decision_tree and failure_patterns object shapes from v1. Evidence refs must use the v1 refs or both failure refs. The result must explicitly contain these four operational strings: package-lock.json, pnpm-lock.yaml, npm ci, pnpm install. For pnpm, preserve frozen-lockfile behavior. Do not use Markdown fences or commentary.\n\nV1 SKILL\n\n---\nname: diagnose-ci-dependency-failure\ndescription: \"Diagnose and repair npm CI dependency failures from error patterns\"\n---\n\n# Diagnose CI dependency failures\n\nApply evidence-grounded npm dependency repairs and let the host Validator decide success. Read [the decision tree](references/decision-tree.md) and [failure patterns](references/failure-patterns.md) when matching an observed error.\n\n## Trigger conditions\n\n- npm ci fails with 'package-lock.json' and 'in sync' patterns\n- npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'\n- npm install fails with 'ERESOLVE' pattern\n\n## Preconditions\n\n- package.json and package-lock.json are present\n- npm is the detected package manager\n- No network access, force flags, or legacy-peer-deps are used\n\n## Diagnostic workflow\n\n- Read package.json and package-lock.json\n- Run npm ci --dry-run to detect lockfile drift\n- Run npm list <missing-module> to verify missing dev dependency\n- Run npm install --dry-run to surface peer conflict\n\n## Tool requirements\n\n- cat\n- npm\n\n## Prohibited actions\n\n- Use of force flags (e.g., --force)\n- Use of legacy-peer-deps\n- Execution of lifecycle scripts (e.g., preinstall, postinstall)\n- Network access during diagnosis/repair\n- Modification of any field in package.json beyond dependency declarations\n- Do not use package managers that were not observed in the training Trace.\n- Do not modify unrelated files or fields.\n- Do not access hidden host data or private Validator configuration.\n\n## Validation rules\n\n- Repaired package.json must pass npm ci without error\n- All deterministic validation stages (install, build, test) must succeed\n- Original failure must be absent after repair\n- No unrelated fields in package.json may change\n\n\nOBSERVABLE FAILURE REPORTS\n\n[{\"schema_version\":\"0.3\",\"fixture_id\":\"heldout-pnpm-frozen-lockfile\",\"failed_stage\":\"install\",\"command\":[\"pnpm\",\"install\",\"--offline\",\"--frozen-lockfile\",\"--ignore-scripts\"],\"exit_code\":1,\"error_category\":\"skill-package-manager-scope-gap\",\"output_hash\":\"f1b7d4c838d5471fdb221ed3ed75f6690a04bf3f58765c1deb6721070c5715dc\",\"evidence_refs\":[\"matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU\"]},{\"schema_version\":\"0.3\",\"fixture_id\":\"heldout-pnpm-missing-build-dependency\",\"failed_stage\":\"build\",\"command\":[\"pnpm\",\"run\",\"build\"],\"exit_code\":1,\"error_category\":\"skill-package-manager-scope-gap\",\"output_hash\":\"11b0eb03d0f69df5e49edba85b2b3701d81802476db20d75c38157cb9cdf1f9d\",\"evidence_refs\":[\"matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g\"]}]\n\nREQUIRED REFINEMENT REFS\n\n[\"matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU\", \"matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g\"]\n"
+    },
+    {
+      "source_event_id": "$1pUPvREc5Vy9M1rRlgHRq6yHRsUj11KJmsJjLeDWiHQ",
+      "timestamp_ms": 1786506684857,
+      "sender_role": "worker",
+      "body": "TRACE2SKILL_SKILL_V2_BLUEPRINT {\"task_id\": \"v03-skill-v2-518f6265\", \"description\": \"Diagnose and repair CI dependency failures for npm and pnpm from error patterns\", \"package_manager_detection\": [\"Check for package-lock.json → npm\", \"Check for pnpm-lock.yaml → pnpm\"], \"trigger_conditions\": [\"npm ci fails with 'package-lock.json' and 'in sync' patterns\", \"npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'\", \"npm install fails with 'ERESOLVE' pattern\", \"pnpm install fails with '--frozen-lockfile' and 'lockfile is not up to date' patterns\", \"pnpm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'\"], \"preconditions\": [\"package.json is present\", \"Either package-lock.json or pnpm-lock.yaml is present (but not both)\", \"No network access, force flags, or lifecycle script execution is used\"], \"diagnostic_workflow\": [\"Read package.json and lockfile (package-lock.json or pnpm-lock.yaml)\", \"Run npm ci --dry-run or pnpm install --dry-run --frozen-lockfile to detect lockfile drift\", \"Run npm list <missing-module> or pnpm list <missing-module> to verify missing dev dependency\", \"Run npm install --dry-run or pnpm install --dry-run to surface peer conflict\"], \"tool_requirements\": [\"cat\", \"npm\", \"pnpm\"], \"prohibited_actions\": [\"Use of force flags (e.g., --force, --no-frozen-lockfile)\", \"Use of legacy-peer-deps\", \"Execution of lifecycle scripts (e.g., preinstall, postinstall)\", \"Network access during diagnosis/repair\", \"Modification of any field in package.json beyond dependency declarations\", \"Modifying lockfiles directly\", \"Support for package managers other than npm or pnpm\"], \"validation_rules\": [\"Repaired package.json must pass npm ci or pnpm install without error\", \"All deterministic validation stages (install, build, test) must succeed using the detected package manager\", \"Original failure must be absent after repair\", \"No unrelated fields in package.json may change\"], \"decision_tree\": [{\"when\": \"npm ci fails with 'package-lock.json' and 'in sync' patterns\", \"then\": \"Align package.json dependencies with package-lock.json versions\", \"evidence_refs\": [\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]}, {\"when\": \"npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'\", \"then\": \"Add missing module to devDependencies in package.json\", \"evidence_refs\": [\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\"]}, {\"when\": \"npm install fails with 'ERESOLVE' pattern\", \"then\": \"Adjust conflicting dependency version in package.json to satisfy peer requirements\", \"evidence_refs\": [\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}, {\"when\": \"pnpm install fails with '--frozen-lockfile' and 'lockfile is not up to date'\", \"then\": \"Align package.json dependencies with pnpm-lock.yaml versions\", \"evidence_refs\": [\"matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU\"]}, {\"when\": \"pnpm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'\", \"then\": \"Add missing module to devDependencies in package.json\", \"evidence_refs\": [\"matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g\"]}], \"failure_patterns\": [{\"signature\": \"npm ci.*package-lock.json.*in sync\", \"diagnosis\": \"lockfile drift between package.json and package-lock.json\", \"repair\": \"Update package.json dependency versions to match package-lock.json\", \"evidence_refs\": [\"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\"]}, {\"signature\": \"MODULE_NOT_FOUND.*Cannot find module\", \"diagnosis\": \"missing dev dependency declaration in package.json\", \"repair\": \"Add required module to devDependencies in package.json\", \"evidence_refs\": [\"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\", \"matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g\"]}, {\"signature\": \"ERESOLVE\", \"diagnosis\": \"peer dependency conflict between declared dependencies and their peer requirements\", \"repair\": \"Change conflicting dependency version in package.json to satisfy peer requirements\", \"evidence_refs\": [\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\"]}, {\"signature\": \"pnpm install.*--frozen-lockfile.*lockfile is not up to date\", \"diagnosis\": \"lockfile drift between package.json and pnpm-lock.yaml\", \"repair\": \"Update package.json dependency versions to match pnpm-lock.yaml\", \"evidence_refs\": [\"matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU\"]}], \"eval_scenarios\": [{\"name\": \"npm lockfile drift detection and repair\", \"failure_class\": \"lockfile-drift\"}, {\"name\": \"pnpm lockfile drift detection and repair\", \"failure_class\": \"lockfile-drift\"}, {\"name\": \"npm missing dev dependency detection and repair\", \"failure_class\": \"missing-dev-dependency\"}, {\"name\": \"pnpm missing dev dependency detection and repair\", \"failure_class\": \"missing-dev-dependency\"}, {\"name\": \"npm peer dependency conflict detection and repair\", \"failure_class\": \"peer-conflict\"}], \"evidence_refs\": [\"trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc\", \"trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI\", \"trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4\", \"matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU\", \"matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g\"]}"
+    }
+  ],
+  "failure_reports": [
+    {
+      "schema_version": "0.3",
+      "fixture_id": "heldout-pnpm-frozen-lockfile",
+      "failed_stage": "install",
+      "command": [
+        "pnpm",
+        "install",
+        "--offline",
+        "--frozen-lockfile",
+        "--ignore-scripts"
+      ],
+      "exit_code": 1,
+      "error_category": "skill-package-manager-scope-gap",
+      "output_hash": "f1b7d4c838d5471fdb221ed3ed75f6690a04bf3f58765c1deb6721070c5715dc",
+      "evidence_refs": [
+        "matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU"
+      ]
+    },
+    {
+      "schema_version": "0.3",
+      "fixture_id": "heldout-pnpm-missing-build-dependency",
+      "failed_stage": "build",
+      "command": [
+        "pnpm",
+        "run",
+        "build"
+      ],
+      "exit_code": 1,
+      "error_category": "skill-package-manager-scope-gap",
+      "output_hash": "11b0eb03d0f69df5e49edba85b2b3701d81802476db20d75c38157cb9cdf1f9d",
+      "evidence_refs": [
+        "matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g"
+      ]
+    }
+  ],
+  "skill_name": "diagnose-ci-dependency-failure",
+  "version": "2.0.0-candidate.1",
+  "manifest_hash": "ce9edb0dd7ff30684e52a33b52b6460a8ec9af0a3a19bb93c727bb40b1d5a162",
+  "blueprint": {
+    "task_id": "v03-skill-v2-518f6265",
+    "description": "Diagnose and repair CI dependency failures for npm and pnpm from error patterns",
+    "package_manager_detection": [
+      "Check for package-lock.json → npm",
+      "Check for pnpm-lock.yaml → pnpm"
+    ],
+    "trigger_conditions": [
+      "npm ci fails with 'package-lock.json' and 'in sync' patterns",
+      "npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'",
+      "npm install fails with 'ERESOLVE' pattern",
+      "pnpm install fails with '--frozen-lockfile' and 'lockfile is not up to date' patterns",
+      "pnpm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'"
+    ],
+    "preconditions": [
+      "package.json is present",
+      "Either package-lock.json or pnpm-lock.yaml is present (but not both)",
+      "No network access, force flags, or lifecycle script execution is used"
+    ],
+    "diagnostic_workflow": [
+      "Read package.json and lockfile (package-lock.json or pnpm-lock.yaml)",
+      "Run npm ci --dry-run or pnpm install --dry-run --frozen-lockfile to detect lockfile drift",
+      "Run npm list <missing-module> or pnpm list <missing-module> to verify missing dev dependency",
+      "Run npm install --dry-run or pnpm install --dry-run to surface peer conflict"
+    ],
+    "tool_requirements": [
+      "cat",
+      "npm",
+      "pnpm"
+    ],
+    "prohibited_actions": [
+      "Use of force flags (e.g., --force, --no-frozen-lockfile)",
+      "Use of legacy-peer-deps",
+      "Execution of lifecycle scripts (e.g., preinstall, postinstall)",
+      "Network access during diagnosis/repair",
+      "Modification of any field in package.json beyond dependency declarations",
+      "Modifying lockfiles directly",
+      "Support for package managers other than npm or pnpm",
+      "do not access hidden host data or private validator configuration.",
+      "do not modify unrelated files or fields.",
+      "do not use package managers that were not observed in the training trace.",
+      "use of force flags (e.g., --force)"
+    ],
+    "validation_rules": [
+      "Repaired package.json must pass npm ci or pnpm install without error",
+      "All deterministic validation stages (install, build, test) must succeed using the detected package manager",
+      "Original failure must be absent after repair",
+      "No unrelated fields in package.json may change"
+    ],
+    "decision_tree": [
+      {
+        "when": "npm ci fails with 'package-lock.json' and 'in sync' patterns",
+        "then": "Align package.json dependencies with package-lock.json versions",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI"
+        ]
+      },
+      {
+        "when": "npm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'",
+        "then": "Add missing module to devDependencies in package.json",
+        "evidence_refs": [
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+        ]
+      },
+      {
+        "when": "npm install fails with 'ERESOLVE' pattern",
+        "then": "Adjust conflicting dependency version in package.json to satisfy peer requirements",
+        "evidence_refs": [
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "when": "pnpm install fails with '--frozen-lockfile' and 'lockfile is not up to date'",
+        "then": "Align package.json dependencies with pnpm-lock.yaml versions",
+        "evidence_refs": [
+          "matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU"
+        ]
+      },
+      {
+        "when": "pnpm run build fails with 'MODULE_NOT_FOUND' and 'Cannot find module'",
+        "then": "Add missing module to devDependencies in package.json",
+        "evidence_refs": [
+          "matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g"
+        ]
+      }
+    ],
+    "failure_patterns": [
+      {
+        "signature": "npm ci.*package-lock.json.*in sync",
+        "diagnosis": "lockfile drift between package.json and package-lock.json",
+        "repair": "Update package.json dependency versions to match package-lock.json",
+        "evidence_refs": [
+          "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI"
+        ]
+      },
+      {
+        "signature": "MODULE_NOT_FOUND.*Cannot find module",
+        "diagnosis": "missing dev dependency declaration in package.json",
+        "repair": "Add required module to devDependencies in package.json",
+        "evidence_refs": [
+          "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4",
+          "matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g"
+        ]
+      },
+      {
+        "signature": "ERESOLVE",
+        "diagnosis": "peer dependency conflict between declared dependencies and their peer requirements",
+        "repair": "Change conflicting dependency version in package.json to satisfy peer requirements",
+        "evidence_refs": [
+          "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc"
+        ]
+      },
+      {
+        "signature": "pnpm install.*--frozen-lockfile.*lockfile is not up to date",
+        "diagnosis": "lockfile drift between package.json and pnpm-lock.yaml",
+        "repair": "Update package.json dependency versions to match pnpm-lock.yaml",
+        "evidence_refs": [
+          "matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU"
+        ]
+      }
+    ],
+    "eval_scenarios": [
+      {
+        "name": "npm lockfile drift detection and repair",
+        "failure_class": "lockfile-drift"
+      },
+      {
+        "name": "pnpm lockfile drift detection and repair",
+        "failure_class": "lockfile-drift"
+      },
+      {
+        "name": "npm missing dev dependency detection and repair",
+        "failure_class": "missing-dev-dependency"
+      },
+      {
+        "name": "pnpm missing dev dependency detection and repair",
+        "failure_class": "missing-dev-dependency"
+      },
+      {
+        "name": "npm peer dependency conflict detection and repair",
+        "failure_class": "peer-conflict"
+      }
+    ],
+    "evidence_refs": [
+      "matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU",
+      "matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g",
+      "trace:trace_1033f617c6e84149867370661fafe155#$8mtTM1wfuQXb9xzIjGF2IgGZrOX59E7iAXZytZgCcqc",
+      "trace:trace_13d6730f107949ed826b28629d3b9fe8#$TsEGHLlIzhczCuG1TzjBOStQruKkE0CZlLUi1wE5DVI",
+      "trace:trace_ef00f7013bfa42cba0d4c94eb772d590#$c5sQpJnt4Z6Gc6wZiomsKBvm4Ay5SuirpBz-3SIrFK4"
+    ]
+  },
+  "started_at": "2026-08-12T03:50:31.703530+00:00",
+  "ended_at": "2026-08-12T03:51:26.050882+00:00",
+  "status": "succeeded"
+}

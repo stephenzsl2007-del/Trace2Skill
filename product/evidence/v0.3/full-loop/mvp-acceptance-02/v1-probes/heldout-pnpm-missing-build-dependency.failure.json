@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.3",
+  "fixture_id": "heldout-pnpm-missing-build-dependency",
+  "failed_stage": "build",
+  "command": [
+    "pnpm",
+    "run",
+    "build"
+  ],
+  "exit_code": 1,
+  "error_category": "skill-package-manager-scope-gap",
+  "output_hash": "11b0eb03d0f69df5e49edba85b2b3701d81802476db20d75c38157cb9cdf1f9d",
+  "evidence_refs": [
+    "matrix:$xq8HBShSZVakHsmvZD9D-VVx0AllnSEQAxWo0cKZs2g"
+  ]
+}

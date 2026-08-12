@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trace2skill.dev/schemas/dependency-fixture-0.2.0.json",
+  "title": "Trace2Skill Answer-Free Dependency Fixture",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "fixture_id", "split", "package_manager", "failure_class", "failure_pattern", "task_prompt", "reproduce", "verify", "safety"],
+  "properties": {
+    "schema_version": { "const": "0.2.0" },
+    "fixture_id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]+$" },
+    "split": { "enum": ["training", "held-out"] },
+    "package_manager": { "enum": ["npm", "pnpm"] },
+    "failure_class": { "enum": ["peer-range", "workspace-package", "override-mismatch"] },
+    "failure_pattern": { "type": "string", "minLength": 1 },
+    "task_prompt": { "type": "string", "minLength": 20 },
+    "reproduce": { "$ref": "#/$defs/command" },
+    "verify": { "$ref": "#/$defs/command" },
+    "safety": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["offline", "allow_scripts", "writes_outside_repository"],
+      "properties": {
+        "offline": { "const": true },
+        "allow_scripts": { "const": false },
+        "writes_outside_repository": { "const": false }
+      }
+    }
+  },
+  "$defs": {
+    "command": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["program", "args"],
+      "properties": {
+        "program": { "enum": ["npm", "pnpm"] },
+        "args": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+      }
+    }
+  }
+}

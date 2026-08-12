@@ -1,0 +1,16 @@
+{
+  "schema_version": "0.3",
+  "name": "diagnose-ci-dependency-failure",
+  "version": "2.0.0-candidate.1",
+  "manifest_hash": "ce9edb0dd7ff30684e52a33b52b6460a8ec9af0a3a19bb93c727bb40b1d5a162",
+  "installed_hash": "bb217eecbaf0e224801e7a64247483978d32001667eef8672ca69f58421f20d5",
+  "zip_sha256": "ff2855ceb2398debd242563541f3e88235f4763ee7719578a80ee29d79c19e8a",
+  "files": {
+    "SKILL.md": "7464049bce918fcd3e9b95a3b46232afcfabddcf573127aa96f3b8277ae9e3ed",
+    "evals/cases.json": "8b11df69ba6486ba0b6f7431b19c496e4293924fec3e8b9c0e79b700b8731390",
+    "references/decision-tree.md": "91dec968327fe1d5eb20b745fbafbf131dd44df915a316f87adf0e41285c5e46",
+    "references/failure-patterns.md": "66a27e2a80d20fcc14cc6b2b9ef1a443492558609ed7b19103fa731ac42a9dc7",
+    "trace2skill.json": "d3458118697742452059661ee7385c903b10264e938bb49f521323efe7284a58",
+    "validators/validate.py": "43f4f50c49d0ac4677cf41e0adb3bac0165041a54e6df90deaeb2a9b97794425"
+  }
+}

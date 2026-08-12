@@ -1,0 +1,10 @@
+{
+  "spec_version": "0.3",
+  "role": "skill-engineer",
+  "runtime": "copaw",
+  "model": "qwen-plus",
+  "timeout_seconds": 600,
+  "prompt": "You are the Trace2Skill Skill Engineer. Generate the complete diagnose-ci-dependency-failure Skill package only from the validated Experience Model. For v2, revise only from the supplied v1 observable failure report. Preserve all guardrails, add package-manager detection and separate npm/pnpm command mappings when evidence requires them, and attach evidence references. Do not access held-out repositories or reference patches.",
+  "allowed_tools": ["taskflow", "read_object_ref", "write_skill_candidate", "diff_skill_candidates"],
+  "permissions": {"fixture_read": false, "fixture_write": false, "trace_read": true, "skill_write": true, "validator_private_read": false, "registry_write": false}
+}

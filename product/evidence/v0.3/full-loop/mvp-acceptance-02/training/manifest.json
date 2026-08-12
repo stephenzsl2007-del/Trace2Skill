@@ -1,0 +1,34 @@
+{
+  "schema_version": "0.3",
+  "created_at": "2026-08-12T03:47:25.253232+00:00",
+  "purpose": "Trace2Skill MVP three-Trace training input",
+  "entries": [
+    {
+      "fixture_id": "train-npm-lockfile-drift",
+      "trace_id": "trace_13d6730f107949ed826b28629d3b9fe8",
+      "task_id": "v03-train-npm-lockfile-drift-31bf4c33",
+      "fixture_hash": "3e6a9cf81f6869acc5d5a4d2c34bcb157349c58df5a7b4833ed623cb6fbac801",
+      "trace_sha256": "a52344eedf67135b9b8cec6d3dd85e3d8c28c44149a56738d7a06714fd8d4c65",
+      "path": "product/runs/mvp-acceptance-02/training/train-npm-lockfile-drift.trace.json",
+      "validator_passed": true
+    },
+    {
+      "fixture_id": "train-npm-missing-dev-dependency",
+      "trace_id": "trace_ef00f7013bfa42cba0d4c94eb772d590",
+      "task_id": "v03-train-npm-missing-dev-dependency-748ead4f",
+      "fixture_hash": "57e272ea78fe88de0b1996670e291172d95ba619b39bba600b206734f150e8b7",
+      "trace_sha256": "3f609b6afc1b47f1566ac61b319e234a9e8e2b773c7c664254cbf232baad6bb2",
+      "path": "product/runs/mvp-acceptance-02/training/train-npm-missing-dev-dependency.trace.json",
+      "validator_passed": true
+    },
+    {
+      "fixture_id": "train-npm-peer-conflict",
+      "trace_id": "trace_1033f617c6e84149867370661fafe155",
+      "task_id": "v03-train-npm-peer-conflict-3b0b9d2b",
+      "fixture_hash": "c0380d5a1f3d1262c95829850ec827469345dc6712d2f7132210ad9560de4313",
+      "trace_sha256": "e89b61931f6bf66862b63105e66449075db120788d3e90647d3e17c58ec800cb",
+      "path": "product/runs/mvp-acceptance-02/training/train-npm-peer-conflict.trace.json",
+      "validator_passed": true
+    }
+  ]
+}

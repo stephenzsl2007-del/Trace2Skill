@@ -1,0 +1,1 @@
+{"name":"heldout-pnpm-frozen-lockfile","private":true,"version":"1.0.0","packageManager":"pnpm@11.16.0","scripts":{"build":"node build.js","test":"node test.js"},"dependencies":{"frozen-lib":"file:vendor/frozen-lib-v2"}}

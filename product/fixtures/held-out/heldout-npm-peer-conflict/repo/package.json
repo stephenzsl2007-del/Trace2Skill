@@ -1,0 +1,1 @@
+{"name":"heldout-npm-peer-conflict","private":true,"version":"1.0.0","scripts":{"build":"node build.js","test":"node test.js"},"dependencies":{"eslint":"file:vendor/eslint-9","legacy-config":"file:vendor/legacy-config"}}

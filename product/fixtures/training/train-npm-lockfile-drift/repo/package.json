@@ -1,0 +1,1 @@
+{"name":"train-npm-lockfile-drift","private":true,"version":"1.0.0","scripts":{"build":"node build.js","test":"node test.js"},"dependencies":{"ci-util":"file:vendor/ci-util-v2"}}

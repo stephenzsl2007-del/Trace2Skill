@@ -1,0 +1,1 @@
+{"name":"eval-npm-peer-eslint","private":true,"version":"1.0.0","devDependencies":{"eslint":"file:vendor/eslint-9","legacy-config":"file:vendor/legacy-config"}}

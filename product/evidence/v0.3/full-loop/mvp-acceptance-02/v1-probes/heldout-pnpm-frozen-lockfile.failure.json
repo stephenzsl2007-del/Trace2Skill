@@ -1,0 +1,18 @@
+{
+  "schema_version": "0.3",
+  "fixture_id": "heldout-pnpm-frozen-lockfile",
+  "failed_stage": "install",
+  "command": [
+    "pnpm",
+    "install",
+    "--offline",
+    "--frozen-lockfile",
+    "--ignore-scripts"
+  ],
+  "exit_code": 1,
+  "error_category": "skill-package-manager-scope-gap",
+  "output_hash": "f1b7d4c838d5471fdb221ed3ed75f6690a04bf3f58765c1deb6721070c5715dc",
+  "evidence_refs": [
+    "matrix:$S-bK6jhTT_JONlCf9CWze5wO85EYK9TAfHhVdt8HlKU"
+  ]
+}

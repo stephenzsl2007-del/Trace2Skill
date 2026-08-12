@@ -1,0 +1,75 @@
+{
+  "schema_version": "0.3",
+  "run_id": "mvp-acceptance-02",
+  "kind": "full-loop",
+  "status": "succeeded",
+  "phase": "completed",
+  "started_at": "2026-08-12T03:45:17.904048+00:00",
+  "ended_at": "2026-08-12T03:52:23.498775+00:00",
+  "phases": {
+    "training_execution:train-npm-peer-conflict": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:45:17.906330+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:46:41.643920+00:00",
+      "output_tail": "{\"trace\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\raw-training\\\\train-npm-peer-conflict.json\", \"status\": \"succeeded\", \"error\": null}\n"
+    },
+    "training_execution:train-npm-lockfile-drift": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:46:41.644924+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:47:00.202903+00:00",
+      "output_tail": "{\"trace\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\raw-training\\\\train-npm-lockfile-drift.json\", \"status\": \"succeeded\", \"error\": null}\n"
+    },
+    "training_execution:train-npm-missing-dev-dependency": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:47:00.203912+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:47:25.077169+00:00",
+      "output_tail": "{\"trace\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\raw-training\\\\train-npm-missing-dev-dependency.json\", \"status\": \"succeeded\", \"error\": null}\n"
+    },
+    "training_freeze": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:47:25.079411+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:47:25.265802+00:00",
+      "output_tail": "{\"manifest\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\training\\\\manifest.json\", \"trace_count\": 3}\n"
+    },
+    "trace_analysis": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:47:25.267819+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:48:48.904239+00:00",
+      "output_tail": "{\"output\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\experience\\\\analysis.json\", \"status\": \"succeeded\"}\n"
+    },
+    "skill_v1_generation": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:48:48.905913+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:49:44.208419+00:00",
+      "output_tail": "{\"output\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\skills\\\\diagnose-ci-dependency-failure\\\\1.0.0-candidate.1\", \"manifest\": {\"schema_version\": \"0.3\", \"name\": \"diagnose-ci-dependency-failure\", \"version\": \"1.0.0-candidate.1\", \"manifest_hash\": \"ca608c29f5462952a5efb6131496dff8e67f5a5ad5e2375d36489aa35b99c497\", \"installed_hash\": \"966a7cfcfa469648656cd2340bdf573ee50bcab853df3e9d0e117679a03bc699\", \"zip_sha256\": \"551a7887489c42f3c76dad8d45ac63e16bb5ca8eaaaddcfbaaf48dc0ad727dd1\", \"files\": {\"SKILL.md\": \"d4e217ae449464b5ae5b04a2ac2c35dd06bf2a45dc65d3c63cc3cff8cf6dacaf\", \"evals/cases.json\": \"d9b8627539222e4da06e2e679024c9112859ce8eed441f64926f153c73c4bf8e\", \"references/decision-tree.md\": \"8641160c1bd2199fae459dc4c09988578214107f4bf0255977a555e6d57541d1\", \"references/failure-patterns.md\": \"341645b386089fedc8383007d0b68b05da4600c197ee7671972986f57f2d77fb\", \"trace2skill.json\": \"ffa0261011046cc4b5d6dd2c5e6365450655ed3d884c4da56b331f94e43564bb\", \"validators/validate.py\": \"d0cd2b073f6b6042621683742fbd2f2ba3c8bdb90af08a564ee4d8976e53d1e5\"}}}\n"
+    },
+    "v1_evaluation": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:49:44.210417+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:50:31.136627+00:00",
+      "output_tail": "{\"output\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\v1-probes\", \"gate_passed\": true, \"results\": {\"heldout-npm-peer-conflict\": true, \"heldout-pnpm-frozen-lockfile\": false, \"heldout-pnpm-missing-build-dependency\": false}}\n"
+    },
+    "refinement": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:50:31.138232+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:51:26.080301+00:00",
+      "output_tail": "{\"output\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\skills\\\\diagnose-ci-dependency-failure\\\\2.0.0-candidate.1\", \"manifest\": {\"schema_version\": \"0.3\", \"name\": \"diagnose-ci-dependency-failure\", \"version\": \"2.0.0-candidate.1\", \"manifest_hash\": \"ce9edb0dd7ff30684e52a33b52b6460a8ec9af0a3a19bb93c727bb40b1d5a162\", \"installed_hash\": \"bb217eecbaf0e224801e7a64247483978d32001667eef8672ca69f58421f20d5\", \"zip_sha256\": \"ff2855ceb2398debd242563541f3e88235f4763ee7719578a80ee29d79c19e8a\", \"files\": {\"SKILL.md\": \"7464049bce918fcd3e9b95a3b46232afcfabddcf573127aa96f3b8277ae9e3ed\", \"evals/cases.json\": \"8b11df69ba6486ba0b6f7431b19c496e4293924fec3e8b9c0e79b700b8731390\", \"references/decision-tree.md\": \"91dec968327fe1d5eb20b745fbafbf131dd44df915a316f87adf0e41285c5e46\", \"references/failure-patterns.md\": \"66a27e2a80d20fcc14cc6b2b9ef1a443492558609ed7b19103fa731ac42a9dc7\", \"trace2skill.json\": \"d3458118697742452059661ee7385c903b10264e938bb49f521323efe7284a58\", \"validators/validate.py\": \"43f4f50c49d0ac4677cf41e0adb3bac0165041a54e6df90deaeb2a9b97794425\"}}}\n"
+    },
+    "skill_v2_evaluation": {
+      "status": "succeeded",
+      "started_at": "2026-08-12T03:51:26.082917+00:00",
+      "exit_code": 0,
+      "ended_at": "2026-08-12T03:52:23.495775+00:00",
+      "output_tail": "{\"output\": \"C:\\\\Users\\\\25746\\\\Documents\\\\ChatGPT\\\\GOAI\\\\product\\\\runs\\\\mvp-acceptance-02\\\\v2-probes\", \"gate_passed\": true, \"results\": {\"heldout-npm-peer-conflict\": true, \"heldout-pnpm-frozen-lockfile\": true, \"heldout-pnpm-missing-build-dependency\": true}}\n"
+    }
+  },
+  "error": null
+}

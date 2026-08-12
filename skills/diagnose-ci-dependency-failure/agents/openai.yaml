@@ -1,0 +1,4 @@
+interface:
+  display_name: "CI Dependency Diagnosis"
+  short_description: "Diagnose npm and pnpm CI dependency failures"
+  default_prompt: "Use $diagnose-ci-dependency-failure to diagnose and safely repair this npm or pnpm CI dependency failure."

@@ -1,0 +1,148 @@
+{
+  "candidate_id": "candidate:javascript_dependency_failure:npm:eresolve",
+  "confidence": {
+    "factors": [
+      "Source trace passed AgentTeams lifecycle, submission, semantic, and secret-scan checks",
+      "A Worker supplied structured diagnostic evidence"
+    ],
+    "level": "low",
+    "limitations": [
+      "Only one training trace supports this candidate",
+      "The trace diagnosed supplied text and did not repair a real repository",
+      "Source roles proposed conflicting first diagnostic commands"
+    ],
+    "score": 0.45
+  },
+  "evidence": {
+    "diagnostic_recommendations": [
+      {
+        "actor_role": "manager",
+        "command": "npm install --dry-run",
+        "evidence_event_ids": [
+          "evt-0002"
+        ],
+        "selected": false
+      },
+      {
+        "actor_role": "worker",
+        "command": "npm ls",
+        "evidence_event_ids": [
+          "evt-0069"
+        ],
+        "selected": true
+      }
+    ],
+    "failure_lessons": [
+      {
+        "category": "command-failure",
+        "count": 1,
+        "evidence_event_ids": [
+          "evt-0057"
+        ]
+      },
+      {
+        "category": "missing-artifact",
+        "count": 3,
+        "evidence_event_ids": [
+          "evt-0026",
+          "evt-0081",
+          "evt-0087"
+        ]
+      },
+      {
+        "category": "missing-required-input",
+        "count": 2,
+        "evidence_event_ids": [
+          "evt-0042",
+          "evt-0049"
+        ]
+      },
+      {
+        "category": "unknown-tool-error",
+        "count": 2,
+        "evidence_event_ids": [
+          "evt-0078",
+          "evt-0096"
+        ]
+      }
+    ],
+    "successful_path_event_ids": [
+      "evt-0038",
+      "evt-0067",
+      "evt-0069",
+      "evt-0071",
+      "evt-0072"
+    ]
+  },
+  "schema_version": "0.1.0",
+  "security": {
+    "contains_chain_of_thought": false,
+    "raw_payloads_copied": false,
+    "source_secret_scan_passed": true
+  },
+  "skill": {
+    "guardrails": [
+      "Do not default to --force or --legacy-peer-deps",
+      "Do not mix npm, pnpm, and Yarn lockfiles",
+      "Do not claim resolution without an install plus project-level verification"
+    ],
+    "name": "diagnose-javascript-dependency-failures",
+    "preconditions": [
+      "Run from the affected project root",
+      "Identify the package manager from the lockfile before choosing commands"
+    ],
+    "steps": [
+      {
+        "evidence_event_ids": [],
+        "evidence_type": "template",
+        "id": "detect-manager",
+        "instruction": "Inspect package.json and lockfiles; stop if the package manager is ambiguous."
+      },
+      {
+        "evidence_event_ids": [
+          "evt-0069"
+        ],
+        "evidence_type": "observed",
+        "id": "diagnose-read-only",
+        "instruction": "Start with the observed read-only diagnostic: npm ls."
+      },
+      {
+        "evidence_event_ids": [],
+        "evidence_type": "template",
+        "id": "locate-conflict",
+        "instruction": "Identify the direct dependency, peer requirement, and incompatible resolved version; preserve the exact error evidence."
+      },
+      {
+        "evidence_event_ids": [],
+        "evidence_type": "template",
+        "id": "propose-minimal-change",
+        "instruction": "Propose the smallest semver-compatible manifest change and show the diff before mutation."
+      },
+      {
+        "evidence_event_ids": [],
+        "evidence_type": "template",
+        "id": "verify",
+        "instruction": "Use the detected package manager to install, run the relevant tests or CI command, and report command evidence and exit status."
+      }
+    ],
+    "triggers": [
+      "npm ERESOLVE",
+      "JavaScript dependency resolution failure",
+      "peer dependency conflict"
+    ],
+    "verification": [
+      "Dependency installation exits successfully",
+      "Relevant tests or CI checks pass",
+      "The original resolution error no longer appears"
+    ]
+  },
+  "source_trace_ids": [
+    "agentteams:trace-task-001:day2"
+  ],
+  "status": "candidate",
+  "task_signature": {
+    "failure": "ERESOLVE",
+    "kind": "javascript_dependency_failure",
+    "package_manager": "npm"
+  }
+}

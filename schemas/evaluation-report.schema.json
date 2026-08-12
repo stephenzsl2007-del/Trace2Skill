@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trace2skill.dev/schemas/evaluation-report-0.2.0.json",
+  "title": "Trace2Skill Day 4 Evaluation Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "experiment", "sources", "pairs", "aggregate", "conclusion", "limitations"],
+  "properties": {
+    "schema_version": { "const": "0.2.0" },
+    "experiment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["framework", "framework_version", "model", "trial_count", "pair_count"],
+      "properties": {
+        "framework": { "const": "AgentTeams" },
+        "framework_version": { "type": "string" },
+        "model": { "type": "string" },
+        "trial_count": { "type": "integer", "minimum": 4 },
+        "pair_count": { "type": "integer", "minimum": 2 }
+      }
+    },
+    "sources": { "type": "array", "minItems": 4, "items": { "type": "object" } },
+    "pairs": { "type": "array", "minItems": 2, "items": { "type": "object" } },
+    "aggregate": { "type": "object" },
+    "conclusion": { "enum": ["measured_improvement", "no_measured_improvement", "regression", "inconclusive"] },
+    "limitations": { "type": "array", "minItems": 1, "items": { "type": "string" } }
+  }
+}
