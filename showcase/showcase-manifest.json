@@ -3,8 +3,8 @@
   "artifact": {
     "file": "trace2skill-demo.html",
     "media_type": "text/html",
-    "bytes": 24096,
-    "sha256": "a40c3d1b15a42ba4650c55133181ba324c8a61c7bdd57826e245c626305d094e"
+    "bytes": 34815,
+    "sha256": "2ce52cdb2dbf2268c4e38ac498c016791edd398f4b32ed6a9953008b76c2311b"
   },
   "presentation": {
     "mode": "evidence-replay",
