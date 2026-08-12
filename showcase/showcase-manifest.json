@@ -1,51 +1,53 @@
 {
+  "schema_version": "0.3.0",
   "artifact": {
-    "bytes": 12414,
     "file": "trace2skill-demo.html",
     "media_type": "text/html",
-    "sha256": "638bf1232fd6f40b5271440d09cea8a35162a65342d6396a8f4041d59051e65f"
+    "bytes": 24096,
+    "sha256": "a40c3d1b15a42ba4650c55133181ba324c8a61c7bdd57826e245c626305d094e"
   },
-  "contract": {
-    "claims": {
-      "efficiency_improvement": "not-claimed",
-      "independent_transfer": "one-new-held-out-task",
-      "registry_publication": "staged-local",
-      "statistical_significance": "not-claimed"
-    },
-    "evidence_derived": true,
+  "presentation": {
+    "mode": "evidence-replay",
+    "live": false,
+    "language": "zh-CN",
     "network_dependencies": [],
-    "offline": true,
     "raw_messages_embedded": false
   },
-  "schema_version": "0.1.0",
+  "claims": {
+    "training_trace_count": 3,
+    "v1_held_out": "1/3",
+    "v2_held_out": "3/3",
+    "api_event_count": 19,
+    "api_trace_count": 10,
+    "idempotency_verified": true,
+    "statistical_significance": "not-claimed",
+    "registry_publication": "pending",
+    "agentscope_live_integration": "pending"
+  },
   "sources": [
     {
-      "file": "evidence/day1-evidence.json",
-      "sha256": "87ed968b8ad53e3149c2a0a95925d8b0ba52d2e29dd24bf917d5ba9934c70385"
+      "file": "product/evidence/v0.3/full-loop/mvp-acceptance-02/run.json",
+      "sha256": "76c54d61c2144da777b2f6be0b230899bdba327b8fa5a9d9f63bf49ef6e3600f"
     },
     {
-      "file": "evidence/day2-trace-summary.json",
-      "sha256": "39ef215df0387df963081312b63f2c99230cabacebee51397fac8f569644dc58"
+      "file": "product/evidence/v0.3/full-loop/mvp-acceptance-02/training/manifest.json",
+      "sha256": "a6bf77f1a23760a09f86da71581be45578af6fbc6adbcb9b2c03a660206d8626"
     },
     {
-      "file": "evidence/day4-report.json",
-      "sha256": "61fb6ac950cbde376507ef9b3807fb91bef7126069270b0505d76b2582733c71"
+      "file": "product/evidence/v0.3/full-loop/mvp-acceptance-02/experience/analysis.json",
+      "sha256": "60607dbbd316efc593622cbb2d5ad151903512fc2e24a76d53c60f462de56e97"
     },
     {
-      "file": "evidence/day5-report.json",
-      "sha256": "12e651e786ff36056033512e2abdd1117814dbb867b6d1c9c3b913984bac6c24"
+      "file": "product/evidence/v0.3/full-loop/mvp-acceptance-02/v1-probes/manifest.json",
+      "sha256": "816e5245458fe6f7c3ca85dacfb201bdffe7bd808dcbab3b8f8f2c0ec6a50a3c"
     },
     {
-      "file": "evidence/day6/eval-pnpm-workspace-logger-baseline.json",
-      "sha256": "37ecbbcc8f2c471c4c3dbf2e2db4f238513a9d8bcffa9ced985061672aea15c0"
+      "file": "product/evidence/v0.3/full-loop/mvp-acceptance-02/v2-probes/manifest.json",
+      "sha256": "921d7012695c972fb09a86a637c3502830d30484894f44a9046fade88e54c068"
     },
     {
-      "file": "evidence/day6/eval-pnpm-workspace-logger-skill-v2.json",
-      "sha256": "54a5f1d0984b5a02709356f1f7a9f0da4f41928b7971e83ab2189e1e170dc9ca"
-    },
-    {
-      "file": "release-bundles/diagnose-javascript-dependency-failures/2.0.0/release-manifest.json",
-      "sha256": "b7b982915ab2ff2e3cd9a3f2a6f7d0c9b630a870b9cccedd616921f6cc0be631"
+      "file": "product/evidence/v0.3/api-acceptance/mvp-api-acceptance-01.json",
+      "sha256": "ffd8a4251f8aab425c52372372b47e0ceb79473437b646d477d54f09a9f5375d"
     }
   ]
 }

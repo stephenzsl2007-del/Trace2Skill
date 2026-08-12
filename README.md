@@ -6,6 +6,8 @@ Trace2Skill is a multi-agent learning system built on AgentTeams. It records how
 
 The current v0.3 MVP focuses on npm and pnpm dependency failures in JavaScript/TypeScript CI pipelines.
 
+**[Open the evidence replay demo →](https://stephenzsl2007-del.github.io/Trace2Skill/)**
+
 ## Why Trace2Skill?
 
 Most agent systems retain a conversation or a final answer after a task. That is useful context, but it is not an executable, testable capability. Trace2Skill turns one-off execution experience into a software asset:
